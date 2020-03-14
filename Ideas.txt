@@ -1,0 +1,3 @@
+Work out the rules of poker to be implemented
+Name all the cards with the number followed by the suit
+eg. 5 of hearts is 5h
