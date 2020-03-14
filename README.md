@@ -1,2 +1,2 @@
 # Casino
- Pyhton Project
+ Python Project
