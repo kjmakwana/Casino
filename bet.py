@@ -28,8 +28,11 @@ def bet(player_purse ,current_bet):   #player_purse is the amount in the purse o
             print("Please enter valid bet")
     return player_purse
 
-blinds()
-purse[2]=bet(purse[2],2000)
-print(purse[2])
+def call(player_purse, current_bet):
+    player_purse-=current_bet
 
-    
+def check():
+    #Transfer control to next player
+
+def fold():
+    #empty out the list having the cards of the player who wants to fold   
