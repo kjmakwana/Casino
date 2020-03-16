@@ -1,0 +1,23 @@
+#Brute Force Method
+1. The cards are in the format of a list of strings. Eg:["01H","13H","12C","02D","07S","03C","04H"]
+
+2. Select 5 cards from these and find the rank
+
+3. Repeat the process for 21 times and keep replacing the rank if the current rank is higher than the previous rank
+
+4. If rank of 2 players is same then compare the required sum and finally announce the winner
+
+#Improvements
+1. Reduce the number of iterations. Possible ways to do that:
+a. If rank found is the highest possible rank(royal flush) then stop repeating the process for other combinations.
+b.
+
+
+#Implemenation
+1. Combination method from itertools can be used to generate all possible combinations
+2. We will require 10 different functions to find rank(royal flush/straight flush/....high card) of a hand
+
+
+
+
+
