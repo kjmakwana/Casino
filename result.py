@@ -1,5 +1,5 @@
 #return 1 for royal flush and 10 for high card
-cards=["14H","14H","11H","14H","10H","11S","12S"] #cards dealt to one player + the board
+cards=["06H","13H","11H","10H","09H","08H","07H"] #cards dealt to one player + the board
 hand=["14H","14H","14H","05H","05H"] #5cards selected from the cards list
 from collections import defaultdict as dd
 from itertools import combinations
@@ -16,7 +16,7 @@ def check_royalflush(hand):
 
 def check_straightflush(hand):
     k=check_straight(hand)
-    l=check_flush
+    l=check_flush(hand)
     if(k==6 and l==5):
         return 2
     else:
@@ -102,13 +102,16 @@ def check_pair(hand):
         return 10
 
 def find_rank(cards):
+    cards.sort(reverse=True)
     pos_hand=list(combinations(cards,5))
     best_rank=10
     for hand in pos_hand:
         rank=check_royalflush(hand)
         if(rank<best_rank):
             best_rank=rank
+            best_hand=hand
     print(best_rank)
+    print(best_hand)
 find_rank(cards)
 
 
