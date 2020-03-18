@@ -6,6 +6,7 @@ import math
 main_window = tk.Tk()
 main_window.title("Poker")
 main_window.iconbitmap("C:/Users/sgmakwana/Downloads/poker_chip2.ico")
+main_window['bg']='green'
 
 
 player_names=[]
