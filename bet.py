@@ -8,11 +8,10 @@ main_window.title("Poker")
 main_window.iconbitmap("C:/Users/sgmakwana/Downloads/poker_chip2.ico")
 
 
-
 player_names=[]
 player_who_have_folded=[]
-cc=0
-chc=0
+cc=1
+chc=1
 b=0
 
 
@@ -89,6 +88,8 @@ def bet(player_purse ,current_bet):   #player_purse is the amount in the purse o
             break
         else:
             print("Please enter valid bet")
+    call_button.grid(row=1,column=0)
+    check_button.destroy()
     return player_purse,current_bet
 
 def call(player_purse, current_bet):
@@ -99,7 +100,9 @@ def call(player_purse, current_bet):
     print(player_names[i],"'s current purse = $",purse[i])
     cc+=1
     if cc==(len(player_names)-len(player_who_have_folded)):
-        cc=0
+        cc=1
+        check_button=tk.Button(main_window,text="Check",command=call_check)
+        check_button.grid(row=0,column=1)
         #distribute next set of cards
     player_change()
 
@@ -109,7 +112,8 @@ def check():
     chc+=1
     b=0
     if chc==(len(player_names)-len(player_who_have_folded)):
-        chc=0
+        chc=1
+        check_button.grid(row=0,column=1)
         #distribute next set of cards
     player_change()
 
@@ -141,16 +145,16 @@ def call_call():
 
 
 
-bet_button=tk.Button(main_window,text="Raise",command=call_bet,fg='white',bg='black')
+bet_button=tk.Button(main_window,text="Raise",command=call_bet)
 check_button=tk.Button(main_window,text="Check",command=call_check)
 fold_button=tk.Button(main_window,text="Fold",command=call_fold)
 call_button=tk.Button(main_window,text="Call",command=call_call)
 
 
-bet_button.pack()
-check_button.pack()
-fold_button.pack()
-call_button.pack()
+bet_button.grid(row=0,column=0)
+check_button.grid(row=0,column=1)
+fold_button.grid(row=1,column=1)
+
 
 
 main_window.mainloop()
