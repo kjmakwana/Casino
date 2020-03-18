@@ -133,7 +133,6 @@ def find_rank(cards):
         rank=check_hand(hand)
         if(rank<best_rank):
             best_rank=rank
-            best_hand=hand
-    print(best_rank)
-    print(best_hand)
+            #best_hand=hand
+    return best_rank
 find_rank(cards)
