@@ -1,8 +1,6 @@
 #rf doesnt have any case
 from collections import defaultdict as dd
 #sf,flush, straight, highcard can be solved using one function
-hand1=["14H","14H","11H","09H","11H"]
-hand2=["14H","14H","10H","13H","10H"]
 def solve1(hand1,hand2):
     values1=[i[0:2] for i in hand1]
     values1=list(map(int,values1))
@@ -42,4 +40,13 @@ def solve2(hand1,hand2):
             return 2
     return 0
 
-print(solve2(hand1,hand2))
+def xyz(cardlist,rank):
+    hand1=cardlist[0:5]
+    hand2=cardlist[5:11]
+    if(rank==2 or rank==5 or rank==6 or rank==10):
+        return(solve1(hand1,hand2))
+    elif(rank==3 or rank==4 or rank==7 or rank==8 or rank==9):
+        return(solve2(hand1,hand2))
+    else:
+        return 0
+
