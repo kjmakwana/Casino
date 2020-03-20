@@ -57,6 +57,8 @@ for j in range (0,n):       #to input player names
 for j in range (0,n):       #n is number of players
     purse.append(100000)
 
+
+
 def blinds():
     global round_pool
     print("Player Purses are")
@@ -67,70 +69,93 @@ def blinds():
 blinds()
 
 
-#End of bet
-
-
 deck=goc.card_deck(List,List1,List2,List3,List4,deck)
+print(deck)
 deck,List6=goc.player_hand(deck,List6,n,player_names)
 
 
 def round_number():
     global round_no,deck,table,results
     round_no+=1
-    if(round_no==1):
+    if(round_no%4==1):
         deck,table=goc.round1_reveal(deck,table)
         print(table)
-    elif(round_no==2):
+    elif(round_no%4==2):
         deck,table=goc.round2_reveal(deck,table)
         print(table)
-    elif(round_no==3):
+    elif(round_no%4==3):
         deck,table=goc.round3_reveal(deck,table)
         print(table)
-    elif(round_no==4):
-        destroy()
+    elif(round_no%4==0):
+        
         for j in range(0,2*n,2):
             if(player_names[int(j/2)] not in player_who_have_folded):
                 cards=[]
                 cards.append(List6[j])
                 cards.append(List6[j+1])
                 cards+=table
-                results.append(res.find_rank(cards))
+                flag=0
+                results.append(res.find_rank(cards,flag))
+            else:
+                results.append(11)
         print(results)
-
         if(results.count(min(results))==1):
             print("Winner is",player_names[results.index(min(results))])
+            purse[results.index(min(results))]+=round_pool
+            print(purse[results.index(min(results))])
         else:
             fcards=[]
+            cards1=[]
+            split=[]
             count=0
             fplayer=0
             splayer=0
+            print()
+            print()
             for j in range(len(results)):
                 if(results[j]==min(results)):
+                    flag=1
                     cards1=[]
                     cards1.append(List6[2*j])
                     cards1.append(List6[2*j+1])
                     cards1+=table
+                    cards1=res.find_rank(cards1,flag)
                     count+=1
+                    if(count==1):
+                        fplayer=splayer
                     splayer=j
-                fcards+=cards1
-                if(count==1):
-                    fplayer=splayer
-                elif(count==2):
+                    fcards+=cards1
+                print(fcards)
+
+                
+                if(count==2):
                     count=1
                     w_player=fr.xyz(fcards,min(results))
                     if(w_player==1):
-                        del(fcards[5:])
+                        del fcards[5:]
                         fplayer=fplayer
-                    else:
-                        del(fcards[0:5])
+                    elif(w_player==2):
+                        del fcards[0:5]
                         fplayer=splayer
-                print("Winner is", fplayer)
+                    else:
+                        del fcards[0:5]
+                        split.append(fplayer)
+                        split.append(splayer)
+
+            if(fplayer not in split):
+                print("Winner is", player_names[fplayer])
+                purse[fplayer]+=round_pool
+                print(purse[fplayer])
+            else:
+                print("The pot is split in between ",end="")
+                split=set(split)
+                for s in split:
+                    print(player_names[s],end="  ")
+                    purse[s]+=int(round_pool/len(split))
+                    print(purse[s])
 
 
-
-
-
-        
+        reset()
 
 def player_change():
     while True:
@@ -148,9 +173,31 @@ def player_change():
     print("It is",player_names[i],"'s turn")
     print("Current Bet is $",current_bet)
     print("Money in pot is $",round_pool)
-    
 
 player_change()
+
+def reset():
+
+    global List,List1,List2,List3,List4,List6,deck,table,round_pool,round_no,current_bet,cc,chc,player_who_have_folded,b,c,results
+    List6=[]
+    deck=[]
+    table=[]
+    results=[]
+    player_who_have_folded=[]
+    results=[]
+    round_pool=0
+    cc=1
+    chc=1
+    b=0
+    c=0
+    current_bet=1000
+    print()
+    print()
+    deck=List1+List2+List3+List4
+    blinds()
+    deck,List6=goc.player_hand(deck,List6,n,player_names)
+    player_change()
+
 
 def bet(player_purse ,current_bet):   #player_purse is the amount in the purse of the player who wants to raise
     global round_pool,b
@@ -191,6 +238,7 @@ def check():
     print(player_names[i],"has checked")
     chc+=1
     b=0
+
     if chc==(len(player_names)-len(player_who_have_folded)):
         chc=0
         check_button=tk.Button(main_window,text="Check",command=call_check)
@@ -202,6 +250,12 @@ def fold():
     global i,chc,cc
     print(player_names[i],"has folded")
     player_who_have_folded.append(player_names[i])
+    if(len(player_who_have_folded)-len(player_names)==-1):
+        all_fold=list(set(player_names)-set(player_who_have_folded))
+        print("Winner is ",all_fold[0])
+        purse[player_names.index(all_fold[0])]+=round_pool
+        print(purse[player_names.index(all_fold[0])])
+        reset()
     if chc==(len(player_names)-len(player_who_have_folded)):
         chc=0
         check_button=tk.Button(main_window,text="Check",command=call_check)

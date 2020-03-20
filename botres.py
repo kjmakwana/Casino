@@ -125,7 +125,7 @@ def check_hand(hand):
         return 10
 
 
-def find_rank(cards):
+def find_rank(cards,flag):
     cards.sort(reverse=True)
     pos_hand=list(combinations(cards,5))
     best_rank=10
@@ -133,6 +133,9 @@ def find_rank(cards):
         rank=check_hand(hand)
         if(rank<best_rank):
             best_rank=rank
-            #best_hand=hand
-    return best_rank
-find_rank(cards)
+            best_hand=hand
+    if(flag==0):
+        return best_rank
+    elif(flag==1):
+        return best_hand
+
