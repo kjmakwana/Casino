@@ -2,7 +2,9 @@ import random
 from collections import defaultdict as dd
 import botres as b
 from itertools import combinations
-List=[]
+import bpoker as bp
+import math
+"""List=[]
 List1=[] 
 List2=[]
 List3=[]
@@ -11,8 +13,8 @@ List4=[]
 List5=[]
 #List6 for storing the cards of players
 outspt=[0,0,0,0,0,0,0,0,0,0]
-outspr=[0,0,0,0,0,0,0,0,0,0]
-betamount=0
+
+
 for i in range(2,15):
     if(i<10):
         List.append('0'+str(i))  
@@ -52,13 +54,27 @@ def river(dealer,List5):
 
 distribute(bcards,List5)
 
+ """   
+
+
+
+#flop(dealer, List5)
+def pre_flop(bcards,current_bet):
+    values=[i[0:2] for i in bcards]
+    values=list(map(int,values))
+    suit=[i[2] for i in bcards]
+    if(len(set(values))==1):
+        return values[0]*current_bet
+    elif(abs(values[0]-values[1])==5 and len(set(suit))==1):
+        return (6-abs(values[0]-values[1]))*current_bet
+    else:
+         return 1000
     
 
 
-
-flop(dealer, List5)
-
-def pre_turn(bcards,dealer,List5,outspt,betamount):
+def pre_turn(bcards,dealer,List5):
+    betamount=0
+    outspt=[0,0,0,0,0,0,0,0,0,0]
     avc=bcards+dealer
     twocards=combinations(List5,2)
     for tc in twocards:
@@ -96,17 +112,19 @@ def pre_turn(bcards,dealer,List5,outspt,betamount):
 
     for i in range(10):
         betamount=betamount+round(outspt[i]*(1.2**(10-i)))
-    print("Rs",betamount)
+    return betamount
 
         
 
-pre_turn(bcards,dealer,List5,outspt,betamount)
-turn(dealer,List5)
+#pre_turn(bcards,dealer,List5)
+#turn(dealer,List5)
 
 
-def pre_river(bcards,dealer,List5,outspr,betamount):    
+def pre_river(bcards,dealer,List5):
+    betamount=0
+    outspr=[0,0,0,0,0,0,0,0,0,0] 
     avc=bcards+dealer
-    for i in range(46):
+    for i in range(len(List5)):
         flags=[0,0,0,0,0,0,0,0,0,0]
         avcf=[]
         avcf.append(List5[i])
@@ -142,14 +160,42 @@ def pre_river(bcards,dealer,List5,outspr,betamount):
         for i in range(10):
             betamount=betamount+round(outspr[i]*(1.4**(10-i)))
 
-    print("Rs",betamount)
+    return betamount
 
 
-pre_river(bcards,dealer,List5,outspr,betamount)
-river(dealer,List5)
+#pre_river(bcards,dealer,List5)
+#river(dealer,List5)
 
-def post_river(bcards,dealer,List5,betamount):
+def post_river(bcards,dealer,List5):
     avcf=bcards+dealer
-    betamount=(9-b.find_rank(avcf))*random.randint(5,8)*1000
-    print("Rs",betamount)
-post_river(bcards,dealer,List5,betamount)
+    betamount=(9-b.find_rank(avcf,0))*random.randint(5,8)*1000
+    return betamount
+
+def head(round_no,current_bet,bcards,dealer,List5,chc,fold,n):
+    if(random.randint(1,11)==5):
+        bet_amount=current_bet*random.randint(2,5)
+    elif(round_no==0):
+        bet_amount=pre_flop(bcards,current_bet)
+    elif(round_no==1):
+        bet_amount=pre_turn(bcards,dealer,List5)
+    elif(round_no==2):
+        bet_amount=pre_river(bcards,dealer,List5)
+    elif(round_no==3):
+        bet_amount=post_river(bcards,dealer,List5)
+    else:
+        pass
+    n=len(str(bet_amount))
+    bet_amount=int(math.ceil(bet_amount/math.pow(10,n-1))*math.pow(10,n-1))
+    print(bet_amount)
+    print(chc)
+    if(bet_amount<current_bet/1.25):
+        bp.call_fold()    
+    elif(bet_amount>current_bet*1.25):
+        bp.call_bet(bet_amount)
+    elif(chc==n-len(fold)-1):
+        bp.call_check()
+    else:
+        bp.call_call()
+
+
+#post_river(bcards,dealer,List5,betamount)
