@@ -6,29 +6,30 @@ def card_deck(List,List1,List2,List3,List4,deck):
 
     for j in range(0,13):
         if j<8:
-            List1.append(str(0)+str(j+2)+'H')
+            List1.append(str(0)+str(j+2)+'C')
         else:
-            List1.append(str(j+2)+'H')
+            List1.append(str(j+2)+'C')
 
     for k in range (0,13):
         if k<8:
-            List2.append(str(0)+str(k+2)+'D')
+            List2.append(str(0)+str(k+2)+'S')
         else:
-            List2.append(str(k+2)+'D')    
+            List2.append(str(k+2)+'S')    
 
     for q in range (0,13):
         if q<8:
-            List3.append(str(0)+str(q+2)+'S')
+            List3.append(str(0)+str(q+2)+'H')
         else:
-            List3.append(str(q+2)+'S') 
+            List3.append(str(q+2)+'H') 
 
     for m in range (0,13):
         if m<8:
-            List4.append(str(0)+str(m+2)+'C')
+            List4.append(str(0)+str(m+2)+'D')
         else:
-            List4.append(str(m+2)+'C')     
+            List4.append(str(m+2)+'D')     
     deck=List1+List2+List3+List4
-    return deck
+    deck1=List1+List2+List3+List4
+    return deck,deck1
 
 card_deck([],[],[],[],[],[])
 def player_hand(deck,List6,n,player_names):

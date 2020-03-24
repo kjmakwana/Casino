@@ -1,20 +1,29 @@
 #Result
 
 #FinalResult
-import tkinter as tk
+from tkinter import *
+from tkinter import messagebox
 import generationofcards as goc
 import botres as res
 import FinalResult as fr
 import Bot
+import gui
+import time
+
+
 List= []
 List1=[] 
 List2=[]
 List3=[]
 List4=[]
 deck=[]
+deck1=[]
 List6=[]
 table=[]
 
+x1=600
+y1=450
+rf=True
 
 player_names=[]
 player_who_have_folded=[]
@@ -30,16 +39,18 @@ current_bet=1000
 
 c=0
 round_no=0
+dollar=0
+
 
 results=[]
 #Tkinter
-main_window = tk.Tk()
+main_window = Tk()
 main_window.title("Poker")
 #main_window.iconbitmap("C:/Users/sgmakwana/Downloads/poker_chip2.ico")
 main_window['bg']='green'
 
 
-
+rff=StringVar()
 
 
 
@@ -76,22 +87,25 @@ def blinds():
 blinds()
 
 
-deck=goc.card_deck(List,List1,List2,List3,List4,deck)
+deck,deck1=goc.card_deck(List,List1,List2,List3,List4,deck)
 print(deck)
 deck,List6=goc.player_hand(deck,List6,n,player_names)
 
 
 def round_number():
-    global round_no,deck,table,results
+    global round_no,deck,table,results,deck1,x1,y1
     round_no+=1
     if(round_no%4==1):
         deck,table=goc.round1_reveal(deck,table)
+        x1,y1=gui.flop_reveal(table,deck1,x1,y1)
         print(table)
     elif(round_no%4==2):
         deck,table=goc.round2_reveal(deck,table)
+        x1,y1=gui.turn_reveal(table,deck1,x1,y1)
         print(table)
     elif(round_no%4==3):
         deck,table=goc.round3_reveal(deck,table)
+        x1,y1=gui.river_reveal(table,deck1,x1,y1)
         print(table)
     elif(round_no%4==0):
         
@@ -165,6 +179,7 @@ def round_number():
         reset()
 
 def player_change():
+    global x1,y1
     while True:
         global c,i    
         c=c+1
@@ -177,6 +192,28 @@ def player_change():
             continue
         else:
             break
+    
+    tpot=Label(text="Pot= $"+str(round_pool),fg="white",bg="green")
+    tpot.config(font=("Courier BOLD", 15))
+    tpot.place(x=500,y=50)
+
+    tbet=Label(text="Current Bet= $"+str(current_bet),fg="white",bg="green")
+    tbet.config(font=("Courier BOLD", 15))
+    tbet.place(x=800,y=50)
+
+    if player_names not in player_who_have_folded:
+        x1,y1=gui.player_reveal(List6[2*i:2*i+2],deck1,x1,y1)
+        pname=Label(text="Current Player: "+player_names[i]+"         ",fg="white",bg="green")
+        pname.config(font=("Courier BOLD", 15))
+        pname.place(x=570,y=600)
+
+    yy1=10
+    for j in range(n):
+        ppurse=Label(text=player_names[j]+"= $"+str(purse[j]),fg="white",bg="green")
+        ppurse.config(font=("Courier BOLD", 12))
+        ppurse.place(x=1300,y=yy1)
+        yy1=yy1+25
+
     if(player_names[i]=="BOT"):
         Bot.head(round_no,current_bet,List6[-2:],table,deck,chc,player_who_have_folded,n)
     else:
@@ -206,32 +243,49 @@ def reset():
     current_bet=1000
     print()
     print()
+    gui.reset()
     deck=List1+List2+List3+List4
     blinds()
     deck,List6=goc.player_hand(deck,List6,n,player_names)
     #player_change()
 
+def raiseflag():
+    global dollar
+    dollar=int(slider.get)
+    
+    print(dollar)
+
 
 def bet(player_purse ,current_bet,bet_amount,i):   #player_purse is the amount in the purse of the player who wants to raise
-    global round_pool,b,chc,cc,r
+    global round_pool,b,chc,cc,r,dollar
+    dollar=0
     cc=0
     chc=0
+
+    betlabel=Button(text="Enter amount to raise",command=raiseflag)
+    betlabel.place(x=1200,y=500)
+
+    
+    
     if(bet_amount==0):
+        # print("Enter amount to raise")
+        # print("Amount must be a multiple of $1000")
+        # print("It must be more than the current bet which is $",current_bet)
+        # print("Your current purse is $",player_purse)
+        # slider=Entry()
+        # slider.config(bg="#006600",fg="white",font=("Courier BOLD", 12))
+        # slider.place(x=1200,y=600)
+        messagebox.showinfo(title="Betamount", message="Please enter a valid bet")
         while(True):
-            print("Enter amount to raise")
-            print("Amount must be a multiple of $1000")
-            print("It must be more than the current bet which is $",current_bet)
-            print("Your current purse is $",player_purse)
-            dollar=int(input("enter amount: $"))
-            if dollar<=player_purse and dollar%1000==0 and dollar>current_bet:
-                player_purse-=dollar
-                round_pool+=dollar
-                b=1
-                r[i]=dollar
-                current_bet=dollar
-                break
-            else:
-                print("Please enter valid bet")
+
+
+            player_purse-=dollar
+            round_pool+=dollar
+            b=1
+            r[i]=dollar
+            current_bet=dollar
+            break
+            
     else:
         print("Bot has raised ",bet_amount)
         player_purse-=bet_amount
@@ -239,7 +293,7 @@ def bet(player_purse ,current_bet,bet_amount,i):   #player_purse is the amount i
         b=1
         current_bet=bet_amount
 
-    call_button.grid(row=1,column=0)
+    call_button.place(x=1100,y=550)
     check_button.destroy()
     return player_purse,current_bet
 
@@ -254,8 +308,9 @@ def call(player_purse, current_bet):
     cc+=1
     if cc==(len(player_names)-len(player_who_have_folded)-1):
         cc=0
-        check_button=tk.Button(main_window,text="Check",command=call_check)
-        check_button.grid(row=0,column=1)
+        check_button=Button(text="Check",command=call_check,padx=20,pady=10,bg="#006600",fg="white")
+        check_button.place(x=1000,y=600)
+        check_button.config(font=("Courier BOLD", 12))
         round_number()
     player_change()
 
@@ -267,8 +322,9 @@ def check():
 
     if chc==(len(player_names)-len(player_who_have_folded)):
         chc=0
-        check_button=tk.Button(main_window,text="Check",command=call_check)
-        check_button.grid(row=0,column=1)
+        check_button=Button(text="Check",command=call_check,padx=20,pady=10,bg="#006600",fg="white")
+        check_button.place(x=1000,y=600)
+        check_button.config(font=("Courier BOLD", 12))
         round_number()
     player_change()
 
@@ -284,20 +340,26 @@ def fold():
         reset()
     if chc==(len(player_names)-len(player_who_have_folded)):
         chc=0
-        check_button=tk.Button(main_window,text="Check",command=call_check)
-        check_button.grid(row=0,column=1)
+        check_button=Button(main_window,text="Check",command=call_check,padx=20,pady=10)
+        check_button.place(x=1000,y=600)
+        check_button.config(font=("Courier BOLD", 12))
         round_number()
     if cc==(len(player_names)-len(player_who_have_folded)-1):
         cc=0
-        check_button=tk.Button(main_window,text="Check",command=call_check)
-        check_button.grid(row=0,column=1)
+        check_button=Button(main_window,text="Check",command=call_check,padx=20,pady=10)
+        check_button.place(x=1000,y=600)
+        check_button.config(font=("Courier BOLD", 12))
         round_number()
     player_change()
     #empty out the list having the cards of the player who wants to fold  
 
 def call_bet(bet_amount=0):
     global i,current_bet
+    slider=Scale(from_=current_bet, to=purse[i], resolution=1000,orient=VERTICAL,length=150,tickinterval=1000)
+    slider.config(bg="#006600",fg="white",font=("Courier BOLD", 12))
+    slider.place(x=1200,y=600)
     purse[i],current_bet=bet(purse[i],current_bet,bet_amount,i)
+
     print(player_names[i],"'s purse =",purse[i])
     print("Current bet is $",current_bet) 
     player_change()
@@ -316,16 +378,20 @@ def call_call():
 
 
 
-bet_button=tk.Button(main_window,text="Raise",command=call_bet)
-check_button=tk.Button(main_window,text="Check",command=call_check)
-fold_button=tk.Button(main_window,text="Fold",command=call_fold)
-call_button=tk.Button(main_window,text="Call",command=call_call)
+bet_button=Button(text="Raise",command=call_bet,padx=20,pady=10,bg="#006600",fg="white")
+check_button=Button(text="Check",command=call_check,padx=20,pady=10,bg="#006600",fg="white")
+fold_button=Button(text="Fold ",command=call_fold,padx=20,pady=10,bg="#006600",fg="white")
+call_button=Button(text="Call ",command=call_call,padx=20,pady=10,bg="#006600",fg="white")
+bet_button.config(font=("Courier BOLD", 12))
+
+check_button.config(font=("Courier BOLD", 12))
+fold_button.config(font=("Courier BOLD", 12))
+call_button.config(font=("Courier BOLD", 12))
+
+bet_button.place(x=1100,y=600)
+check_button.place(x=1000,y=600)
+fold_button.place(x=1000,y=550)
 
 
-bet_button.grid(row=0,column=0)
-check_button.grid(row=0,column=1)
-fold_button.grid(row=1,column=1)
 
-
-
-main_window.mainloop()
+mainloop()

@@ -55,6 +55,7 @@ def river(dealer,List5):
 distribute(bcards,List5)
 
  """   
+ 
 
 
 
@@ -68,7 +69,8 @@ def pre_flop(bcards,current_bet):
     elif(abs(values[0]-values[1])==5 and len(set(suit))==1):
         return (6-abs(values[0]-values[1]))*current_bet
     else:
-         return 1000
+        return 100
+         
     
 
 
