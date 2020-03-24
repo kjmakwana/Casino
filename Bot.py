@@ -4,6 +4,7 @@ import botres as b
 from itertools import combinations
 import bpoker as bp
 import math
+import time
 """List=[]
 List1=[] 
 List2=[]
@@ -173,7 +174,7 @@ def post_river(bcards,dealer,List5):
     betamount=(9-b.find_rank(avcf,0))*random.randint(5,8)*1000
     return betamount
 
-def head(round_no,current_bet,bcards,dealer,List5,chc,fold,n):
+def head(round_no,current_bet,bcards,dealer,List5,chc,fold,n1):
     if(random.randint(1,11)==5):
         bet_amount=current_bet*random.randint(2,5)
     elif(round_no==0):
@@ -190,12 +191,16 @@ def head(round_no,current_bet,bcards,dealer,List5,chc,fold,n):
     bet_amount=int(math.ceil(bet_amount/math.pow(10,n-1))*math.pow(10,n-1))
     print(bet_amount)
     print(chc)
-    if(bet_amount<current_bet/2):
-        bp.call_fold()    
-    elif(bet_amount>current_bet*1.25):
+    print(n1)
+    print(len(fold))
+    
+
+    if(bet_amount>current_bet*1.25):
         bp.call_bet(bet_amount)
-    elif(chc==n-len(fold)-1):
+    elif(chc==n1-len(fold)-1):
         bp.call_check()
+    elif(bet_amount<current_bet/2):
+        bp.call_fold()
     else:
         bp.call_call()
 

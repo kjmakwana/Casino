@@ -72,14 +72,6 @@ takeinputbot()
 takeinput()
 
 
-# Beginning of bet
-
-
-# inputbotb=Button(text="Input",command=takeinputbot,padx=20,pady=10,bg="#006600",fg="white")
-# inputbotb.pack()
-
-
-
 print("Enter names of players")
 for j in range (0,n):       #to input player names
     print("Player ",j+1,":",end="")
@@ -312,6 +304,7 @@ def bet(player_purse ,current_bet,bet_amount,i,dollar):   #player_purse is the a
         round_pool+=bet_amount
         b=1
         current_bet=bet_amount
+        r[i]=current_bet
 
     call_button.destroy()
     call_button=Button(text="Call ",command=call_call,padx=20,pady=10,bg="#006600",fg="white")
@@ -319,7 +312,9 @@ def bet(player_purse ,current_bet,bet_amount,i,dollar):   #player_purse is the a
     call_button.place(x=1100,y=550)
     status1=player_names[i]+" has raised $"+str(current_bet)+"    "
     status=Label(text=status1)
-    check_button.destroy()
+    for cbc in range(1000):
+        check_button.destroy()
+    
     status.config(font=("Courier BOLD", 15),bg="green",fg="white")
     status.place(x=570,y=340)
 
@@ -390,13 +385,13 @@ def fold():
         reset()
     if chc==(len(player_names)-len(player_who_have_folded)):
         chc=0
-        check_button=Button(main_window,text="Check",command=call_check,padx=20,pady=10)
+        check_button=Button(text="Check",command=call_check,padx=20,pady=10,bg="#006600",fg="white")
         check_button.place(x=1000,y=600)
         check_button.config(font=("Courier BOLD", 12))
         round_number()
     if cc==(len(player_names)-len(player_who_have_folded)-1):
         cc=0
-        check_button=Button(main_window,text="Check",command=call_check,padx=20,pady=10)
+        check_button=Button(text="Check",command=call_check,padx=20,pady=10,bg="#006600",fg="white")
         check_button.place(x=1000,y=600)
         check_button.config(font=("Courier BOLD", 12))
         round_number()
@@ -409,17 +404,23 @@ def show(val):
 
 def call_bet(bet_amount=0):
     k=0
-    global dollar,i,current_bet,slider,submit
-    slider=Scale(from_=current_bet, to=purse[i], resolution=1000,orient=VERTICAL,length=150,tickinterval=1000,command=show)
-    slider.config(bg="#006600",fg="white",font=("Courier BOLD", 12))
-    slider.place(x=1200,y=500)
+    print(bet_amount)
+    global dollar,i,current_bet,slider,submit,purse
+    if(bet_amount==0):
+        slider=Scale(from_=current_bet, to=purse[i], resolution=1000,orient=VERTICAL,length=150,tickinterval=1000,command=show)
+        slider.config(bg="#006600",fg="white",font=("Courier BOLD", 12))
+        slider.place(x=1200,y=500)
 
-    submit=Button(text="Place",command=lambda: submitbet(t),padx=20,pady=10,bg="#006600",fg="white")
-    submit.place(x=1350,y=500)
-    print("Anush")
+        submit=Button(text="Place",command=lambda: submitbet(t,bet_amount),padx=20,pady=10,bg="#006600",fg="white")
+        submit.place(x=1350,y=500)
+    else:
+        purse[i],current_bet=bet(purse[i],current_bet,bet_amount,i,dollar)
+        player_change()
 
 
-def submitbet(b):
+
+
+def submitbet(b,bet_amount):
     global k,dollar,purse,current_bet,slider,submit
     k=1
     print(k)
@@ -427,7 +428,7 @@ def submitbet(b):
 
     print(dollar)
     if k==1:
-        purse[i],current_bet=bet(purse[i],current_bet,0,i,dollar)
+        purse[i],current_bet=bet(purse[i],current_bet,bet_amount,i,dollar)
 
         print(player_names[i],"'s purse =",purse[i])
         print("Current bet is $",current_bet) 
