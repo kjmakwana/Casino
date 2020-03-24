@@ -3,7 +3,6 @@
 #FinalResult
 from tkinter import *
 from tkinter import messagebox
-from tkinter import simpledialog
 import generationofcards as goc
 import botres as res
 import FinalResult as fr
@@ -11,7 +10,6 @@ import Bot
 import gui
 import time
 
-hand_dict11= {11:"Folded",1:"Royal-Flush", 2:"Straight-Flush", 3:"Four-of-a-Kind", 4:"Full-HHouse", 5:"Flush", 6:"Straight", 7:"Three-of-a-Kind", 8:"Two-Pairs", 9:"One-Pair", 10:"Highest-Card"}
 
 List= []
 List1=[] 
@@ -52,40 +50,25 @@ main_window.title("Poker")
 main_window['bg']='green'
 
 
+rff=StringVar()
+
+slider=Scale()
 
 
 
-
-
-n=0
-qs="Yes"
-def takeinput():
-    global n
-    n=simpledialog.askinteger("Number of players","Enter number of players")
-
-def takeinputbot():
-    global qs
-    qs=messagebox.askyesno("Bot inclusion","Do you wish to include a bot")
-
-takeinputbot()
-takeinput()
 
 
 # Beginning of bet
+qs=int(input("Do you wish to include a bot "))
 
-
-# inputbotb=Button(text="Input",command=takeinputbot,padx=20,pady=10,bg="#006600",fg="white")
-# inputbotb.pack()
-
-
-
+n=int(input("Enter number of players "))
 print("Enter names of players")
 for j in range (0,n):       #to input player names
     print("Player ",j+1,":",end="")
-    name=simpledialog.askstring("Names","Please enter name of Player"+str(j+1))
+    name=input()
     player_names.append(name) 
     print()
-if(qs==True):
+if(qs==1):
     player_names.append("BOT")
     n+=1
 
@@ -110,9 +93,8 @@ deck,List6=goc.player_hand(deck,List6,n,player_names)
 
 
 def round_number():
-    global round_no,deck,table,results,deck1,x1,y1,call_button
+    global round_no,deck,table,results,deck1,x1,y1
     round_no+=1
-    call_button.destroy()
     if(round_no%4==1):
         deck,table=goc.round1_reveal(deck,table)
         x1,y1=gui.flop_reveal(table,deck1,x1,y1)
@@ -126,7 +108,7 @@ def round_number():
         x1,y1=gui.river_reveal(table,deck1,x1,y1)
         print(table)
     elif(round_no%4==0):
-        gui.finaldisplay()
+        
         for j in range(0,2*n,2):
             if(player_names[int(j/2)] not in player_who_have_folded):
                 cards=[]
@@ -142,7 +124,6 @@ def round_number():
             print("Winner is",player_names[results.index(min(results))])
             purse[results.index(min(results))]+=round_pool
             print(purse[results.index(min(results))])
-            messagebox.showinfo(title="Paisa hi paisa hoga",message="Winner of the current round is "+player_names[results.index(min(results))]+"\n"+"Winning Hand = "+str(hand_dict11[min(results)]))
         else:
             fcards=[]
             cards1=[]
@@ -184,19 +165,15 @@ def round_number():
 
             if(fplayer not in split):
                 print("Winner is", player_names[fplayer])
-                messagebox.showinfo(title="Paisa hi paisa hoga",message="Winner of the current round is "+player_names[fplayer]+"\n"+"Winning Hand = Better "+str(hand_dict11[min(results)]))
                 purse[fplayer]+=round_pool
                 print(purse[fplayer])
             else:
                 print("The pot is split in between ",end="")
-                
                 split=set(split)
                 for s in split:
                     print(player_names[s],end="  ")
                     purse[s]+=int(round_pool/len(split))
                     print(purse[s])
-                    winnerw=winnerw+player_names[s]+" "
-                messagebox.showinfo(title="Paisa hi paisa hoga",message="The pot is split between"+winnerw)
 
 
         reset()
@@ -216,23 +193,23 @@ def player_change():
         else:
             break
     
-    tpot=Label(text="Pot= $"+str(round_pool)+"            ",fg="white",bg="green")
+    tpot=Label(text="Pot= $"+str(round_pool),fg="white",bg="green")
     tpot.config(font=("Courier BOLD", 15))
     tpot.place(x=500,y=50)
 
-    tbet=Label(text="Current Bet= $"+str(current_bet)+"           ",fg="white",bg="green")
+    tbet=Label(text="Current Bet= $"+str(current_bet),fg="white",bg="green")
     tbet.config(font=("Courier BOLD", 15))
     tbet.place(x=800,y=50)
 
     if player_names not in player_who_have_folded:
         x1,y1=gui.player_reveal(List6[2*i:2*i+2],deck1,x1,y1)
-        pname=Label(text="Current Player: "+player_names[i]+"                       ",fg="white",bg="green")
+        pname=Label(text="Current Player: "+player_names[i]+"         ",fg="white",bg="green")
         pname.config(font=("Courier BOLD", 15))
         pname.place(x=570,y=600)
 
     yy1=10
     for j in range(n):
-        ppurse=Label(text=player_names[j]+"= $"+str(purse[j])+"        ",fg="white",bg="green")
+        ppurse=Label(text=player_names[j]+"= $"+str(purse[j]),fg="white",bg="green")
         ppurse.config(font=("Courier BOLD", 12))
         ppurse.place(x=1300,y=yy1)
         yy1=yy1+25
@@ -263,12 +240,6 @@ def reset():
     rc=0
     b=0
     c=0
-    status1="                                                  "
-    status=Label(text=status1)
-    
-    status.config(font=("Courier BOLD", 15),bg="green",fg="white")
-    status.place(x=200,y=450)
-
     current_bet=1000
     print()
     print()
@@ -279,15 +250,18 @@ def reset():
     #player_change()
 
 
+def raiseflag(dollar):
+    global slider
+    dollar=slider.get()
+    return dollar
 
 
 def bet(player_purse ,current_bet,bet_amount,i):   #player_purse is the amount in the purse of the player who wants to raise
-    global round_pool,b,chc,cc,r,dollar,call_button
+    global round_pool,b,chc,cc,r,dollar
     cc=0
     chc=0
 
-
-
+    
     if(bet_amount==0):
         while(True):
             print("Enter amount to raise")
@@ -310,30 +284,16 @@ def bet(player_purse ,current_bet,bet_amount,i):   #player_purse is the amount i
         b=1
         current_bet=bet_amount
 
-    call_button.destroy()
     call_button=Button(text="Call ",command=call_call,padx=20,pady=10,bg="#006600",fg="white")
     call_button.config(font=("Courier BOLD", 12))
     call_button.place(x=1100,y=550)
-    status1=player_names[i]+" has raised $"+str(current_bet)+"    "
-    status=Label(text=status1)
-    
-    status.config(font=("Courier BOLD", 15),bg="green",fg="white")
-    status.place(x=200,y=450)
-
 
     return player_purse,current_bet
 
 def call(player_purse, current_bet):
-    global i,cc,round_pool,purse,rc,call_button,check_button
+    global i,cc,round_pool,purse,rc
     rc=0
     print(player_names[i],"has called")
-
-    status1=player_names[i]+" has called                                       "
-    status=Label(text=status1)
-    
-    status.config(font=("Courier BOLD", 15),bg="green",fg="white")
-    status.place(x=200,y=450)
-
     print(max(r))
     purse[i]-=max(r)-r[i]
     round_pool+=max(r)-r[i]
@@ -344,19 +304,13 @@ def call(player_purse, current_bet):
         check_button=Button(text="Check",command=call_check,padx=20,pady=10,bg="#006600",fg="white")
         check_button.place(x=1000,y=600)
         check_button.config(font=("Courier BOLD", 12))
-
+        call_button.destroy()
         round_number()
     player_change()
 
 def check():
-    global i,chc,b,check_button
-    print(player_names[i],"has checked") 
-    status1=player_names[i]+" has checked                                   "
-    status=Label(text=status1)
-    
-    status.config(font=("Courier BOLD", 15),bg="green",fg="white")
-    status.place(x=200,y=450)
-
+    global i,chc,b
+    print(player_names[i],"has checked")
     chc+=1
     b=0
 
@@ -369,19 +323,12 @@ def check():
     player_change()
 
 def fold():
-    global i,chc,cc,check_button
+    global i,chc,cc
     print(player_names[i],"has folded")
-    status1=player_names[i]+" has folded                                     "
-    status=Label(text=status1)
-    
-    status.config(font=("Courier BOLD", 15),bg="green",fg="white")
-    status.place(x=200,y=450)
-
     player_who_have_folded.append(player_names[i])
     if(len(player_who_have_folded)-len(player_names)==-1):
         all_fold=list(set(player_names)-set(player_who_have_folded))
         print("Winner is ",all_fold[0])
-        messagebox.showinfo(title="Paise hi paisa hoga",message="winner of the current round is "+all_fold[0]+"\n"+"All others have folded")
         purse[player_names.index(all_fold[0])]+=round_pool
         print(purse[player_names.index(all_fold[0])])
         reset()
@@ -401,10 +348,19 @@ def fold():
     #empty out the list having the cards of the player who wants to fold  
 
 def call_bet(bet_amount=0):
-    global i,current_bet,check_button
+    global i,current_bet,dollar
+    rbutton=Button(text="Raise",command=lambda:raiseflag(dollar),padx=20,pady=10,bg="#006600",fg="white")
+    rbutton.place(x=1200,y=500)
+
+
+    slider=Scale(from_=0, to=200, orient=HORIZONTAL)
+    slider.place(x=1200,y=600)
+    dollar=rbutton.invoke()
+
     purse[i],current_bet=bet(purse[i],current_bet,bet_amount,i)
     print(player_names[i],"'s purse =",purse[i])
-    print("Current bet is $",current_bet) 
+    print("Current bet is $",current_bet)
+
     check_button.destroy()
     player_change()
 
@@ -426,8 +382,8 @@ bet_button=Button(text="Raise",command=call_bet,padx=20,pady=10,bg="#006600",fg=
 check_button=Button(text="Check",command=call_check,padx=20,pady=10,bg="#006600",fg="white")
 fold_button=Button(text="Fold ",command=call_fold,padx=20,pady=10,bg="#006600",fg="white")
 call_button=Button(text="Call ",command=call_call,padx=20,pady=10,bg="#006600",fg="white")
-
 bet_button.config(font=("Courier BOLD", 12))
+
 check_button.config(font=("Courier BOLD", 12))
 fold_button.config(font=("Courier BOLD", 12))
 call_button.config(font=("Courier BOLD", 12))

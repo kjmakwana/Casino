@@ -39,7 +39,7 @@ def player_hand(deck,List6,n,player_names):
         o=random.choice(deck)
         deck.remove(o)
         if(player_names[p-1]=="BOT"):
-            print(player_names[p-1],"= **")
+            print(player_names[p-1],"=",l,o)
         else:
             print(player_names[p-1],"=", l,o )
         List6.append(l)

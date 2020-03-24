@@ -69,7 +69,7 @@ def pre_flop(bcards,current_bet):
     elif(abs(values[0]-values[1])==5 and len(set(suit))==1):
         return (6-abs(values[0]-values[1]))*current_bet
     else:
-        return 100
+        return 1000
          
     
 
@@ -190,7 +190,7 @@ def head(round_no,current_bet,bcards,dealer,List5,chc,fold,n):
     bet_amount=int(math.ceil(bet_amount/math.pow(10,n-1))*math.pow(10,n-1))
     print(bet_amount)
     print(chc)
-    if(bet_amount<current_bet/1.25):
+    if(bet_amount<current_bet/2):
         bp.call_fold()    
     elif(bet_amount>current_bet*1.25):
         bp.call_bet(bet_amount)
