@@ -545,14 +545,45 @@ def river_reveal(table,deck1,x1,y1):
             x1=x1+60
     return x1,y1
 
-def reset():
+def reset(x1,y1,n):
     x1=525
     y1=200
-    for i in range(0,5):
+    for i in range(0,5,1):
         xyz(x1,y1)
         x1=x1+60
+    
+    x1=125
+    y1=-20
+    
+    for j in range(0,2*n,1):
+        if(j%2==1):
+            x1=x1+70
+            print("anush")
+      
+        else:
+            x1=125
+            y1=y1+120
+        xyz(x1,y1)
+        
+        print(x1,y1)
+        
 
 
 
-#def finaldisplay():
+def finaldisplay(x1,y1,List6,n,deck1):
+    print(List6)
+    y1=-20
+    for i in range(0,2*n):
+        if(i%2==1):
+            x1=x1+70
+        else:
+            x1=125
+            y1=y1+120
+        for i1 in range (0,52):            
+            if List6[i]==deck1[i1]:
+                List7[i1](x1,y1)                
+        
+
+
+
     

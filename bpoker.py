@@ -38,7 +38,7 @@ purse=[]
 
 round_pool=0
 current_bet=1000
-
+t=1000
 c=0
 round_no=0
 dollar=0
@@ -55,7 +55,8 @@ main_window['bg']='green'
 
 
 
-
+slider=Scale()
+submit=Scale()
 
 n=0
 qs="Yes"
@@ -126,7 +127,7 @@ def round_number():
         x1,y1=gui.river_reveal(table,deck1,x1,y1)
         print(table)
     elif(round_no%4==0):
-        gui.finaldisplay()
+        gui.finaldisplay(x1,y1,List6,n,deck1)
         for j in range(0,2*n,2):
             if(player_names[int(j/2)] not in player_who_have_folded):
                 cards=[]
@@ -202,6 +203,7 @@ def round_number():
         reset()
 
 def player_change():
+
     global x1,y1
     while True:
         global c,i    
@@ -248,7 +250,8 @@ player_change()
 
 def reset():
 
-    global List,List1,List2,List3,List4,List6,deck,table,round_pool,round_no,current_bet,cc,chc,rc,player_who_have_folded,b,c,results
+    global List,List1,List2,List3,List4,List6,deck,table,round_pool,round_no,current_bet,cc,chc,rc,player_who_have_folded,b,c,results,x1,y1
+    gui.reset(x1,y1,n)
     List6=[]
     deck=[]
     table=[]
@@ -267,12 +270,12 @@ def reset():
     status=Label(text=status1)
     
     status.config(font=("Courier BOLD", 15),bg="green",fg="white")
-    status.place(x=200,y=450)
+    status.place(x=570,y=340)
 
     current_bet=1000
     print()
     print()
-    gui.reset()
+    
     deck=List1+List2+List3+List4
     blinds()
     deck,List6=goc.player_hand(deck,List6,n,player_names)
@@ -281,11 +284,11 @@ def reset():
 
 
 
-def bet(player_purse ,current_bet,bet_amount,i):   #player_purse is the amount in the purse of the player who wants to raise
-    global round_pool,b,chc,cc,r,dollar,call_button
+def bet(player_purse ,current_bet,bet_amount,i,dollar):   #player_purse is the amount in the purse of the player who wants to raise
+    global round_pool,b,chc,cc,r,call_button,check_button
     cc=0
     chc=0
-
+    
 
 
     if(bet_amount==0):
@@ -294,7 +297,7 @@ def bet(player_purse ,current_bet,bet_amount,i):   #player_purse is the amount i
             print("Amount must be a multiple of $1000")
             print("It must be more than the current bet which is $",current_bet)
             print("Your current purse is $",player_purse)
-            dollar=int(input("enter amount: $"))
+            dollar=int(dollar)
             if dollar<=player_purse and dollar%1000==0 and dollar>=current_bet:
                 player_purse-=dollar
                 round_pool+=dollar
@@ -316,9 +319,9 @@ def bet(player_purse ,current_bet,bet_amount,i):   #player_purse is the amount i
     call_button.place(x=1100,y=550)
     status1=player_names[i]+" has raised $"+str(current_bet)+"    "
     status=Label(text=status1)
-    
+    check_button.destroy()
     status.config(font=("Courier BOLD", 15),bg="green",fg="white")
-    status.place(x=200,y=450)
+    status.place(x=570,y=340)
 
 
     return player_purse,current_bet
@@ -332,7 +335,7 @@ def call(player_purse, current_bet):
     status=Label(text=status1)
     
     status.config(font=("Courier BOLD", 15),bg="green",fg="white")
-    status.place(x=200,y=450)
+    status.place(x=570,y=340)
 
     print(max(r))
     purse[i]-=max(r)-r[i]
@@ -355,7 +358,7 @@ def check():
     status=Label(text=status1)
     
     status.config(font=("Courier BOLD", 15),bg="green",fg="white")
-    status.place(x=200,y=450)
+    status.place(x=570,y=340)
 
     chc+=1
     b=0
@@ -375,7 +378,7 @@ def fold():
     status=Label(text=status1)
     
     status.config(font=("Courier BOLD", 15),bg="green",fg="white")
-    status.place(x=200,y=450)
+    status.place(x=570,y=340)
 
     player_who_have_folded.append(player_names[i])
     if(len(player_who_have_folded)-len(player_names)==-1):
@@ -400,13 +403,40 @@ def fold():
     player_change()
     #empty out the list having the cards of the player who wants to fold  
 
+def show(val):
+    global t
+    t=val
+
 def call_bet(bet_amount=0):
-    global i,current_bet,check_button
-    purse[i],current_bet=bet(purse[i],current_bet,bet_amount,i)
-    print(player_names[i],"'s purse =",purse[i])
-    print("Current bet is $",current_bet) 
-    check_button.destroy()
-    player_change()
+    k=0
+    global dollar,i,current_bet,slider,submit
+    slider=Scale(from_=current_bet, to=purse[i], resolution=1000,orient=VERTICAL,length=150,tickinterval=1000,command=show)
+    slider.config(bg="#006600",fg="white",font=("Courier BOLD", 12))
+    slider.place(x=1200,y=500)
+
+    submit=Button(text="Place",command=lambda: submitbet(t),padx=20,pady=10,bg="#006600",fg="white")
+    submit.place(x=1350,y=500)
+    print("Anush")
+
+
+def submitbet(b):
+    global k,dollar,purse,current_bet,slider,submit
+    k=1
+    print(k)
+    dollar=b
+
+    print(dollar)
+    if k==1:
+        purse[i],current_bet=bet(purse[i],current_bet,0,i,dollar)
+
+        print(player_names[i],"'s purse =",purse[i])
+        print("Current bet is $",current_bet) 
+        player_change()
+    slider.destroy()
+    submit.destroy()
+    # dollar=slider.get()
+    
+
 
 def call_check():
     check()
