@@ -249,43 +249,31 @@ def reset():
     deck,List6=goc.player_hand(deck,List6,n,player_names)
     #player_change()
 
-def raiseflag():
-    global dollar
-    dollar=int(slider.get)
-    
-    print(dollar)
+
 
 
 def bet(player_purse ,current_bet,bet_amount,i):   #player_purse is the amount in the purse of the player who wants to raise
     global round_pool,b,chc,cc,r,dollar
-    dollar=0
     cc=0
     chc=0
 
-    betlabel=Button(text="Enter amount to raise",command=raiseflag)
-    betlabel.place(x=1200,y=500)
 
-    
-    
+
     if(bet_amount==0):
-        # print("Enter amount to raise")
-        # print("Amount must be a multiple of $1000")
-        # print("It must be more than the current bet which is $",current_bet)
-        # print("Your current purse is $",player_purse)
-        # slider=Entry()
-        # slider.config(bg="#006600",fg="white",font=("Courier BOLD", 12))
-        # slider.place(x=1200,y=600)
-        messagebox.showinfo(title="Betamount", message="Please enter a valid bet")
         while(True):
-
-
-            player_purse-=dollar
-            round_pool+=dollar
-            b=1
-            r[i]=dollar
-            current_bet=dollar
-            break
-            
+            print("Enter amount to raise")
+            print("Amount must be a multiple of $1000")
+            print("It must be more than the current bet which is $",current_bet)
+            print("Your current purse is $",player_purse)
+            dollar=int(input("enter amount: $"))
+            if dollar<=player_purse and dollar%1000==0 and dollar>=current_bet:
+                player_purse-=dollar
+                round_pool+=dollar
+                b=1
+                r[i]=dollar
+                current_bet=dollar
+                break
+                
     else:
         print("Bot has raised ",bet_amount)
         player_purse-=bet_amount
@@ -355,11 +343,7 @@ def fold():
 
 def call_bet(bet_amount=0):
     global i,current_bet
-    slider=Scale(from_=current_bet, to=purse[i], resolution=1000,orient=VERTICAL,length=150,tickinterval=1000)
-    slider.config(bg="#006600",fg="white",font=("Courier BOLD", 12))
-    slider.place(x=1200,y=600)
     purse[i],current_bet=bet(purse[i],current_bet,bet_amount,i)
-
     print(player_names[i],"'s purse =",purse[i])
     print("Current bet is $",current_bet) 
     player_change()
