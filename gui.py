@@ -570,15 +570,20 @@ def reset(x1,y1,n):
 
 
 
-def finaldisplay(x1,y1,List6,n,deck1):
+def finaldisplay(x1,y1,List6,n,deck1,player_names):
     print(List6)
     y1=-20
     for i in range(0,2*n):
         if(i%2==1):
             x1=x1+70
+            
         else:
             x1=125
             y1=y1+120
+            nav=Label(text=player_names[int(i/2)]+"   ",fg="white",bg="green")
+            nav.config(font=("Courier BOLD", 15))
+            nav.place(x=x1-80,y=y1+20)
+
         for i1 in range (0,52):            
             if List6[i]==deck1[i1]:
                 List7[i1](x1,y1)                

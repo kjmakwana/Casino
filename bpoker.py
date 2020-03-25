@@ -119,7 +119,7 @@ def round_number():
         x1,y1=gui.river_reveal(table,deck1,x1,y1)
         print(table)
     elif(round_no%4==0):
-        gui.finaldisplay(x1,y1,List6,n,deck1)
+        gui.finaldisplay(x1,y1,List6,n,deck1,player_names)
         for j in range(0,2*n,2):
             if(player_names[int(j/2)] not in player_who_have_folded):
                 cards=[]
@@ -262,7 +262,7 @@ def reset():
     status=Label(text=status1)
     
     status.config(font=("Courier BOLD", 15),bg="green",fg="white")
-    status.place(x=570,y=340)
+    status.place(x=570,y=360)
 
     current_bet=1000
     print()
@@ -316,7 +316,7 @@ def bet(player_purse ,current_bet,bet_amount,i,dollar):   #player_purse is the a
         check_button.destroy()
     
     status.config(font=("Courier BOLD", 15),bg="green",fg="white")
-    status.place(x=570,y=340)
+    status.place(x=570,y=360)
 
 
     return player_purse,current_bet
@@ -330,7 +330,7 @@ def call(player_purse, current_bet):
     status=Label(text=status1)
     
     status.config(font=("Courier BOLD", 15),bg="green",fg="white")
-    status.place(x=570,y=340)
+    status.place(x=570,y=360)
 
     print(max(r))
     purse[i]-=max(r)-r[i]
@@ -353,7 +353,7 @@ def check():
     status=Label(text=status1)
     
     status.config(font=("Courier BOLD", 15),bg="green",fg="white")
-    status.place(x=570,y=340)
+    status.place(x=570,y=360)
 
     chc+=1
     b=0
@@ -373,7 +373,7 @@ def fold():
     status=Label(text=status1)
     
     status.config(font=("Courier BOLD", 15),bg="green",fg="white")
-    status.place(x=570,y=340)
+    status.place(x=570,y=360)
 
     player_who_have_folded.append(player_names[i])
     if(len(player_who_have_folded)-len(player_names)==-1):
