@@ -1,4 +1,3 @@
-#rf doesnt have any case
 from collections import defaultdict as dd
 #sf,flush, straight, highcard can be solved using one function
 def solve1(hand1,hand2):
@@ -15,8 +14,7 @@ def solve1(hand1,hand2):
         elif(j<i):
             return 2
     return 0
-
-
+    
 #Fok,tok,two pair,full house and one pair can be solved using one function
 def solve2(hand1,hand2):
     values1=[i[0:2] for i in hand1]

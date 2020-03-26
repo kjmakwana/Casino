@@ -1,125 +1,6 @@
 from tkinter import *
 from PIL import ImageTk,Image
 import random
-
-
-#import random
-"""
-n=int(input("Enter the number of players: "))
-
-List= []
-
-List1=[] 
-
-List2=[]
-
-List3=[]
-
-List4=[]
-
-#List 5 for 1 deck
-deck=[]
-
-#List6 for storing the cards of players
-List6=[]
-
-#Table for cards on the table
-table=[]
-
-deck1=[]
-
-for i in range(2,15):
-    List.append(i)                                                                
-
-for j in range(0,13):
-    if j<8:
-        List1.append(str(0)+str(List[j])+'C')
-    else:
-        List1.append(str(List[j])+'C')
-
-for k in range (0,13):
-    if k<8:
-        List2.append(str(0)+str(List[k])+'S')
-    else:
-        List2.append(str(List[k])+'S')    
-
-for q in range (0,13):
-    if q<8:
-        List3.append(str(0)+str(List[q])+'H')
-    else:
-        List3.append(str(List[q])+'H') 
-
-for m in range (0,13):
-    if m<8:
-        List4.append(str(0)+str(List[m])+'D')
-    else:
-        List4.append(str(List[m])+'D')     
-deck=List1+List2+List3+List4
-deck1=List1+List2+List3+List4
-
-def player_hand(x1,y1):
-    global l
-    global o
-    for p in range(1,n+1):
-        l= random.choice(deck)
-        deck.remove(l)
-        o=random.choice(deck)
-        print("player",p, "has", l,o )
-
-        deck.remove(o)
-        List6.append(l)
-        List6.append(o)
-player_hand(x1,y1)
-
-
-#FLOP ROUND
-
-def round1_reveal(x1,y1):
-    global y
-    global x
-    global z
-    y=random.choice(deck)
-    x= random.choice(deck)
-    z=random.choice(deck)
-    print("Dealer has ",y,x,z)
-    deck.remove(y)
-    deck.remove(x)
-    deck.remove(z)
-round1_reveal(x1,y1) 
-
-
-#TURN ROUND
-
-def round2_reveal(x1,y1):
-    global w
-    w= random.choice(deck)
-    print("Dealer has ",y,x,z,w)
-    deck.remove(w)
-round2_reveal(x1,y1)  
-
-
-#RIVER ROUND
-
-def round3_reveal(x1,y1):
-    global v
-    v= random.choice(deck)
-    print("Dealer has ",y,x,z,w,v)
-    deck.remove(v)
-round3_reveal(x1,y1)
-
-#Cards on the table
-
-def table_cards(x1,y1):
-    table.append(y)
-    table.append(x)
-    table.append(z)
-    table.append(w)
-    table.append(v)
-table_cards(x1,y1)
-"""
-
-
-
     
 def my_func2C(x1,y1):
     global my_img2
@@ -199,8 +80,6 @@ def my_func14C(x1,y1):
     my_label14=Label(image=my_img14)   
     my_label14.place(x=x1,y=y1)
 
-
-
 def my_func2S(x1,y1):
     global my_img15
     my_img15=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\2S.jpg"))
@@ -279,8 +158,6 @@ def my_func14S(x1,y1):
     my_label26=Label(image=my_img26)   
     my_label26.place(x=x1,y=y1)
 
-
-
 def my_func2H(x1,y1):
     global my_img27
     my_img27=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\2H.jpg"))
@@ -358,8 +235,6 @@ def my_func14H(x1,y1):
     my_img39=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\AH.jpg"))
     my_label39=Label(image=my_img39)   
     my_label39.place(x=x1,y=y1)
-
-
 
 def my_func2D(x1,y1):
     global my_img40
@@ -545,38 +420,35 @@ def river_reveal(table,deck1,x1,y1):
             x1=x1+60
     return x1,y1
 
-def reset(x1,y1,n):
+def reset(x1,y1,n,rno):
     x1=525
     y1=200
     for i in range(0,5,1):
         xyz(x1,y1)
-        x1=x1+60
-    
+        x1=x1+60    
     x1=125
     y1=-20
     
     for j in range(0,2*n,1):
         if(j%2==1):
-            x1=x1+70
-            print("anush")
-      
+            x1=x1+70   
         else:
             x1=125
             y1=y1+120
         xyz(x1,y1)
+    
+    rn=Label(text="Round Number = "+str(rno)+"    ",bg="green",fg="white")
+    rn.config(font=("Courier BOLD", 15))
+    rn.place(x=620,y=120)
         
-        print(x1,y1)
+
         
-
-
-
 def finaldisplay(x1,y1,List6,n,deck1,player_names):
     print(List6)
     y1=-20
     for i in range(0,2*n):
         if(i%2==1):
-            x1=x1+70
-            
+            x1=x1+70            
         else:
             x1=125
             y1=y1+120

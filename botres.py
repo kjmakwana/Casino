@@ -23,7 +23,6 @@ def check_straightflush(hand):
     else:
         return False
 
-
 def check_fourofakind(hand):
     values=[i[0:2] for i in hand]
     values=list(map(int,values))
@@ -35,8 +34,6 @@ def check_fourofakind(hand):
     else:
         return False
 
-
-
 def check_fullhouse(hand):
     values=[i[0:2] for i in hand]
     values=list(map(int,values))
@@ -47,7 +44,6 @@ def check_fullhouse(hand):
         return True
     else:
         return False
-
 
 def check_flush(hand):
     c=0

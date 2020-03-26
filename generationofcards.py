@@ -1,9 +1,5 @@
 import random
-def card_deck(List,List1,List2,List3,List4,deck):
-    
-    #for i in range(2,15):
-        #List.append(i)                                                                
-
+def card_deck(List,List1,List2,List3,List4,deck):                                                           
     for j in range(0,13):
         if j<8:
             List1.append(str(0)+str(j+2)+'C')
@@ -46,16 +42,8 @@ def player_hand(deck,List6,n,player_names):
         List6.append(o)
 
     return deck,List6
-        #table.append(l)
-        #table.append(o)
-
-
-#FLOP ROUND
 
 def round1_reveal(deck,table):
-    #global y
-    #global x
-    #global z
     y=random.choice(deck)
     deck.remove(y)
     x=random.choice(deck)
@@ -67,20 +55,12 @@ def round1_reveal(deck,table):
     table.append(z)
     return deck,table
 
-
-
-#TURN ROUND
-
 def round2_reveal(deck,table):
     w= random.choice(deck)
     deck.remove(w)
     table.append(w)
     return deck,table
  
-
-
-#RIVER ROUND
-
 def round3_reveal(deck,table):
     v= random.choice(deck)
     deck.remove(v)
@@ -88,13 +68,3 @@ def round3_reveal(deck,table):
     return deck,table
 
 
-#Cards on the table
-
-#def table_cards():
-    #table.append(l)
-    #table.append(o)
-    #table.append(y)
-    #table.append(x)
-    #table.append(z)
-    #table.append(w)
-    #table.append(v)

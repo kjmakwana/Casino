@@ -1,6 +1,3 @@
-#Result
-
-#FinalResult
 from tkinter import *
 from tkinter import messagebox
 from tkinter import simpledialog
@@ -22,6 +19,7 @@ deck=[]
 deck1=[]
 List6=[]
 table=[]
+debt=[]
 
 x1=600
 y1=450
@@ -35,6 +33,7 @@ rc=0
 b=0
 r=[0,0,0,0,0,0,0,0]
 purse=[]
+rno=2
 
 round_pool=0
 current_bet=1000
@@ -43,23 +42,17 @@ c=0
 round_no=0
 dollar=0
 
-
 results=[]
-#Tkinter
 main_window = Tk()
 main_window.title("Poker")
-#main_window.iconbitmap("C:/Users/sgmakwana/Downloads/poker_chip2.ico")
 main_window['bg']='green'
-
-
-
-
 
 slider=Scale()
 submit=Scale()
 
 n=0
 qs="Yes"
+
 def takeinput():
     global n
     n=simpledialog.askinteger("Number of players","Enter number of players")
@@ -71,8 +64,6 @@ def takeinputbot():
 takeinputbot()
 takeinput()
 
-
-print("Enter names of players")
 for j in range (0,n):       #to input player names
     print("Player ",j+1,":",end="")
     name=simpledialog.askstring("Names","Please enter name of Player"+str(j+1))
@@ -84,8 +75,7 @@ if(qs==True):
 
 for j in range (0,n):       #n is number of players
     purse.append(100000)
-
-
+    debt.append(0)
 
 def blinds():
     global round_pool
@@ -98,9 +88,7 @@ blinds()
 
 
 deck,deck1=goc.card_deck(List,List1,List2,List3,List4,deck)
-print(deck)
 deck,List6=goc.player_hand(deck,List6,n,player_names)
-
 
 def round_number():
     global round_no,deck,table,results,deck1,x1,y1,call_button
@@ -195,7 +183,6 @@ def round_number():
         reset()
 
 def player_change():
-
     global x1,y1
     while True:
         global c,i    
@@ -242,8 +229,17 @@ player_change()
 
 def reset():
 
-    global List,List1,List2,List3,List4,List6,deck,table,round_pool,round_no,current_bet,cc,chc,rc,player_who_have_folded,b,c,results,x1,y1
-    gui.reset(x1,y1,n)
+    global List,List1,List2,List3,List4,List6,deck,table,round_pool,round_no,current_bet,cc,chc,rc,player_who_have_folded,b,c,results,x1,y1,player_names,n,purse,rno
+    l=0
+    while(l!=n):
+        if(purse[l]<=0):
+            purse[l]+=100000
+            player_names[l]+="*"
+            debt[l]-=100000
+            print(purse)
+        l=l+1
+
+    gui.reset(x1,y1,n,rno)
     List6=[]
     deck=[]
     table=[]
@@ -258,9 +254,10 @@ def reset():
     rc=0
     b=0
     c=0
+    rno+=1
+
     status1="                                                  "
-    status=Label(text=status1)
-    
+    status=Label(text=status1)    
     status.config(font=("Courier BOLD", 15),bg="green",fg="white")
     status.place(x=570,y=360)
 
@@ -276,12 +273,10 @@ def reset():
 
 
 
-def bet(player_purse ,current_bet,bet_amount,i,dollar):   #player_purse is the amount in the purse of the player who wants to raise
+def bet(player_purse ,current_bet,bet_amount,i,dollar):   
     global round_pool,b,chc,cc,r,call_button,check_button
     cc=0
     chc=0
-    
-
 
     if(bet_amount==0):
         while(True):
@@ -307,7 +302,7 @@ def bet(player_purse ,current_bet,bet_amount,i,dollar):   #player_purse is the a
         r[i]=current_bet
 
     call_button.destroy()
-    call_button=Button(text="Call ",command=call_call,padx=20,pady=10,bg="#006600",fg="white")
+    call_button=Button(text="Call ",command=call_call,padx=20,pady=10,bg="#006600",fg="white",width=5)
     call_button.config(font=("Courier BOLD", 12))
     call_button.place(x=1100,y=550)
     status1=player_names[i]+" has raised $"+str(current_bet)+"    "
@@ -318,7 +313,6 @@ def bet(player_purse ,current_bet,bet_amount,i,dollar):   #player_purse is the a
     status.config(font=("Courier BOLD", 15),bg="green",fg="white")
     status.place(x=570,y=360)
 
-
     return player_purse,current_bet
 
 def call(player_purse, current_bet):
@@ -327,12 +321,10 @@ def call(player_purse, current_bet):
     print(player_names[i],"has called")
 
     status1=player_names[i]+" has called                                       "
-    status=Label(text=status1)
-    
+    status=Label(text=status1)    
     status.config(font=("Courier BOLD", 15),bg="green",fg="white")
     status.place(x=570,y=360)
 
-    print(max(r))
     purse[i]-=max(r)-r[i]
     round_pool+=max(r)-r[i]
     print(player_names[i],"'s current purse = $",purse[i])
@@ -342,16 +334,15 @@ def call(player_purse, current_bet):
         check_button=Button(text="Check",command=call_check,padx=20,pady=10,bg="#006600",fg="white")
         check_button.place(x=1000,y=600)
         check_button.config(font=("Courier BOLD", 12))
-
         round_number()
     player_change()
 
 def check():
     global i,chc,b,check_button
     print(player_names[i],"has checked") 
-    status1=player_names[i]+" has checked                                   "
-    status=Label(text=status1)
     
+    status1=player_names[i]+" has checked                                   "
+    status=Label(text=status1)    
     status.config(font=("Courier BOLD", 15),bg="green",fg="white")
     status.place(x=570,y=360)
 
@@ -369,9 +360,9 @@ def check():
 def fold():
     global i,chc,cc,check_button
     print(player_names[i],"has folded")
-    status1=player_names[i]+" has folded                                     "
-    status=Label(text=status1)
     
+    status1=player_names[i]+" has folded                                     "
+    status=Label(text=status1)    
     status.config(font=("Courier BOLD", 15),bg="green",fg="white")
     status.place(x=570,y=360)
 
@@ -396,7 +387,7 @@ def fold():
         check_button.config(font=("Courier BOLD", 12))
         round_number()
     player_change()
-    #empty out the list having the cards of the player who wants to fold  
+  
 
 def show(val):
     global t
@@ -425,24 +416,18 @@ def submitbet(b,bet_amount):
     k=1
     print(k)
     dollar=b
-
     print(dollar)
     if k==1:
         purse[i],current_bet=bet(purse[i],current_bet,bet_amount,i,dollar)
-
         print(player_names[i],"'s purse =",purse[i])
         print("Current bet is $",current_bet) 
         player_change()
     slider.destroy()
     submit.destroy()
-    # dollar=slider.get()
-    
-
 
 def call_check():
     check()
     
-
 def call_fold():
     fold()
 
@@ -450,13 +435,10 @@ def call_call():
     global i,current_bet
     call(purse[i],current_bet)
 
-
-
-
 bet_button=Button(text="Raise",command=call_bet,padx=20,pady=10,bg="#006600",fg="white")
 check_button=Button(text="Check",command=call_check,padx=20,pady=10,bg="#006600",fg="white")
-fold_button=Button(text="Fold ",command=call_fold,padx=20,pady=10,bg="#006600",fg="white")
-call_button=Button(text="Call ",command=call_call,padx=20,pady=10,bg="#006600",fg="white")
+fold_button=Button(text="Fold ",command=call_fold,padx=20,pady=10,bg="#006600",fg="white",width=5)
+call_button=Button(text="Call ",command=call_call,padx=20,pady=10,bg="#006600",fg="white",width=5)
 
 bet_button.config(font=("Courier BOLD", 12))
 check_button.config(font=("Courier BOLD", 12))
@@ -466,7 +448,5 @@ call_button.config(font=("Courier BOLD", 12))
 bet_button.place(x=1100,y=600)
 check_button.place(x=1000,y=600)
 fold_button.place(x=1000,y=550)
-
-
 
 mainloop()
