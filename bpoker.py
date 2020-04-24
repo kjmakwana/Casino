@@ -8,6 +8,8 @@ import Bot
 import gui
 import time
 
+#initializing necessary variables
+
 hand_dict11= {11:"Folded",1:"Royal-Flush", 2:"Straight-Flush", 3:"Four-of-a-Kind", 4:"Full-HHouse", 5:"Flush", 6:"Straight", 7:"Three-of-a-Kind", 8:"Two-Pairs", 9:"One-Pair", 10:"Highest-Card"}
 
 List= []
@@ -53,11 +55,11 @@ submit=Scale()
 n=0
 qs="Yes"
 
-def takeinput():
+def takeinput():            #input in tkinter
     global n
     n=simpledialog.askinteger("Number of players","Enter number of players")
 
-def takeinputbot():
+def takeinputbot():         #input in tkinter
     global qs
     qs=messagebox.askyesno("Bot inclusion","Do you wish to include a bot")
 
@@ -87,10 +89,10 @@ def blinds():
 blinds()
 
 
-deck,deck1=goc.card_deck(List,List1,List2,List3,List4,deck)
+deck,deck1=goc.card_deck(List,List1,List2,List3,List4,deck)         #uses function in file generation_of_cards.py
 deck,List6=goc.player_hand(deck,List6,n,player_names)
 
-def round_number():
+def round_number():                                                 #to keep check of number of rounds played and when the next set cards are to be revealed
     global round_no,deck,table,results,deck1,x1,y1,call_button
     round_no+=1
     call_button.destroy()
@@ -182,7 +184,7 @@ def round_number():
 
         reset()
 
-def player_change():
+def player_change():                    #to keep track of which player's turn it is
     global x1,y1
     while True:
         global c,i    
@@ -227,7 +229,7 @@ def player_change():
 
 player_change()
 
-def reset():
+def reset():                #resets everything to start a new hand
 
     global List,List1,List2,List3,List4,List6,deck,table,round_pool,round_no,current_bet,cc,chc,rc,player_who_have_folded,b,c,results,x1,y1,player_names,n,purse,rno
     l=0
@@ -273,7 +275,7 @@ def reset():
 
 
 
-def bet(player_purse ,current_bet,bet_amount,i,dollar):   
+def bet(player_purse ,current_bet,bet_amount,i,dollar):                 #if the player wants to raise
     global round_pool,b,chc,cc,r,call_button,check_button
     cc=0
     chc=0
@@ -315,7 +317,7 @@ def bet(player_purse ,current_bet,bet_amount,i,dollar):
 
     return player_purse,current_bet
 
-def call(player_purse, current_bet):
+def call(player_purse, current_bet):                    #if a player wamts to call
     global i,cc,round_pool,purse,rc,call_button,check_button
     rc=0
     print(player_names[i],"has called")
@@ -337,7 +339,7 @@ def call(player_purse, current_bet):
         round_number()
     player_change()
 
-def check():
+def check():                                            #if a player wants to check
     global i,chc,b,check_button
     print(player_names[i],"has checked") 
     
@@ -357,7 +359,7 @@ def check():
         round_number()
     player_change()
 
-def fold():
+def fold():                                             #if a player wants to fold
     global i,chc,cc,check_button
     print(player_names[i],"has folded")
     
@@ -411,7 +413,7 @@ def call_bet(bet_amount=0):
 
 
 
-def submitbet(b,bet_amount):
+def submitbet(b,bet_amount):                            #to accept bet value
     global k,dollar,purse,current_bet,slider,submit
     k=1
     print(k)
@@ -434,6 +436,10 @@ def call_fold():
 def call_call():
     global i,current_bet
     call(purse[i],current_bet)
+
+
+
+#defining tkinter buttons
 
 bet_button=Button(text="Raise",command=call_bet,padx=20,pady=10,bg="#006600",fg="white")
 check_button=Button(text="Check",command=call_check,padx=20,pady=10,bg="#006600",fg="white")
