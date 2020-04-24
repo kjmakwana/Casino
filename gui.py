@@ -386,9 +386,9 @@ List7.append(my_func14D)
 
 #showing player cards
 
-def player_reveal(List6,deck1,x1,y1):
-    x1=600
-    y1=450
+def player_reveal(List6,deck1,x1,y1,breadth,height):
+    x1=breadth-766
+    y1=height-318
     for g in range (0,2):
         for i1 in range (0,52):
             if List6[g]==deck1[i1]:
@@ -398,9 +398,9 @@ def player_reveal(List6,deck1,x1,y1):
 
 #showing flop cards selected randomly in the file generationofcards.py
 
-def flop_reveal(table,deck1,x1,y1):
-    x1=525
-    y1=200
+def flop_reveal(table,deck1,x1,y1,breadth,height):
+    x1=breadth-841
+    y1=height-568
     for g in range (0,3):
         for i1 in range (0,52):
             if table[g]==deck1[i1]:
@@ -410,9 +410,9 @@ def flop_reveal(table,deck1,x1,y1):
 
 #showing turn cards selected randomly in the file generationofcards.py
 
-def turn_reveal(table,deck1,x1,y1):
-    x1=525+180
-    y1=200
+def turn_reveal(table,deck1,x1,y1,breadth,height):
+    x1=breadth-661
+    y1=height-568
     for i1 in range (0,52):
         if table[3]==deck1[i1]:
             List7[i1](x1,y1)
@@ -421,9 +421,9 @@ def turn_reveal(table,deck1,x1,y1):
 
 #showing river cards selected randomly in the file generationofcards.py
 
-def river_reveal(table,deck1,x1,y1):
-    x1=525+240
-    y1=200
+def river_reveal(table,deck1,x1,y1,breadth,height):
+    x1=breadth-601
+    y1=height-568
     for i1 in range (0,52):
         if table[4]==deck1[i1]:
             List7[i1](x1,y1)
@@ -432,37 +432,37 @@ def river_reveal(table,deck1,x1,y1):
 
 #reset the pictures 
 
-def reset(x1,y1,n,rno):
-    x1=525
-    y1=200
+def reset(x1,y1,n,rno,breadth,height):
+    x1=breadth-841
+    y1=height-568
     for i in range(0,5,1):
         xyz(x1,y1)
         x1=x1+60    
-    x1=125
-    y1=-20
+    x1=breadth-1241
+    y1=height-788
     
     for j in range(0,2*n,1):
         if(j%2==1):
             x1=x1+70   
         else:
-            x1=125
+            x1=breadth-1241
             y1=y1+120
         xyz(x1,y1)
     
     rn=Label(text="Round Number = "+str(rno)+"    ",bg="green",fg="white")
     rn.config(font=("Courier BOLD", 15))
-    rn.place(x=620,y=120)
+    rn.place(x=breadth-746,y=height-648)
         
 #showing result
         
-def finaldisplay(x1,y1,List6,n,deck1,player_names):
+def finaldisplay(x1,y1,List6,n,deck1,player_names,breadth,height):
     print(List6)
     y1=-20
     for i in range(0,2*n):
         if(i%2==1):
             x1=x1+70            
         else:
-            x1=125
+            x1=breadth-1241
             y1=y1+120
             nav=Label(text=player_names[int(i/2)]+"   ",fg="white",bg="green")
             nav.config(font=("Courier BOLD", 15))

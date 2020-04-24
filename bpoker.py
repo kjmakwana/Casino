@@ -10,6 +10,8 @@ import time
 
 #initializing necessary variables
 
+
+
 hand_dict11= {11:"Folded",1:"Royal-Flush", 2:"Straight-Flush", 3:"Four-of-a-Kind", 4:"Full-HHouse", 5:"Flush", 6:"Straight", 7:"Three-of-a-Kind", 8:"Two-Pairs", 9:"One-Pair", 10:"Highest-Card"}
 
 List= []
@@ -48,6 +50,7 @@ results=[]
 main_window = Tk()
 main_window.title("Poker")
 main_window['bg']='green'
+breadth,height=main_window.winfo_screenwidth(),main_window.winfo_screenheight()
 
 slider=Scale()
 submit=Scale()
@@ -98,18 +101,18 @@ def round_number():                                                 #to keep che
     call_button.destroy()
     if(round_no%4==1):
         deck,table=goc.round1_reveal(deck,table)
-        x1,y1=gui.flop_reveal(table,deck1,x1,y1)
+        x1,y1=gui.flop_reveal(table,deck1,x1,y1,breadth,height)
         print(table)
     elif(round_no%4==2):
         deck,table=goc.round2_reveal(deck,table)
-        x1,y1=gui.turn_reveal(table,deck1,x1,y1)
+        x1,y1=gui.turn_reveal(table,deck1,x1,y1,breadth,height)
         print(table)
     elif(round_no%4==3):
         deck,table=goc.round3_reveal(deck,table)
-        x1,y1=gui.river_reveal(table,deck1,x1,y1)
+        x1,y1=gui.river_reveal(table,deck1,x1,y1,breadth,height)
         print(table)
     elif(round_no%4==0):
-        gui.finaldisplay(x1,y1,List6,n,deck1,player_names)
+        gui.finaldisplay(x1,y1,List6,n,deck1,player_names,breadth,height)
         for j in range(0,2*n,2):
             if(player_names[int(j/2)] not in player_who_have_folded):
                 cards=[]
@@ -201,23 +204,23 @@ def player_change():                    #to keep track of which player's turn it
     
     tpot=Label(text="Pot= $"+str(round_pool)+"            ",fg="white",bg="green")
     tpot.config(font=("Courier BOLD", 15))
-    tpot.place(x=500,y=50)
+    tpot.place(x=breadth-866,y=height-718)
 
     tbet=Label(text="Current Bet= $"+str(current_bet)+"           ",fg="white",bg="green")
     tbet.config(font=("Courier BOLD", 15))
-    tbet.place(x=800,y=50)
+    tbet.place(x=breadth-566,y=height-718)
 
     if player_names not in player_who_have_folded:
-        x1,y1=gui.player_reveal(List6[2*i:2*i+2],deck1,x1,y1)
+        x1,y1=gui.player_reveal(List6[2*i:2*i+2],deck1,x1,y1,breadth,height)
         pname=Label(text="Current Player: "+player_names[i]+"                       ",fg="white",bg="green")
         pname.config(font=("Courier BOLD", 15))
-        pname.place(x=570,y=600)
+        pname.place(x=breadth-796,y=height-168)
 
-    yy1=10
+    yy1=height-758
     for j in range(n):
         ppurse=Label(text=player_names[j]+"= $"+str(purse[j])+"        ",fg="white",bg="green")
         ppurse.config(font=("Courier BOLD", 12))
-        ppurse.place(x=1300,y=yy1)
+        ppurse.place(x=breadth-116,y=yy1)
         yy1=yy1+25
 
     if(player_names[i]=="BOT"):
@@ -241,7 +244,7 @@ def reset():                #resets everything to start a new hand
             print(purse)
         l=l+1
 
-    gui.reset(x1,y1,n,rno)
+    gui.reset(x1,y1,n,rno,breadth,height)
     List6=[]
     deck=[]
     table=[]
@@ -261,7 +264,7 @@ def reset():                #resets everything to start a new hand
     status1="                                                  "
     status=Label(text=status1)    
     status.config(font=("Courier BOLD", 15),bg="green",fg="white")
-    status.place(x=570,y=360)
+    status.place(x=breadth-796,y=height-408)
 
     current_bet=1000
     print()
@@ -306,14 +309,14 @@ def bet(player_purse ,current_bet,bet_amount,i,dollar):                 #if the 
     call_button.destroy()
     call_button=Button(text="Call ",command=call_call,padx=20,pady=10,bg="#006600",fg="white",width=5)
     call_button.config(font=("Courier BOLD", 12))
-    call_button.place(x=1100,y=550)
+    call_button.place(x=breadth-266,y=height-218)
     status1=player_names[i]+" has raised $"+str(current_bet)+"    "
     status=Label(text=status1)
     for cbc in range(1000):
         check_button.destroy()
     
     status.config(font=("Courier BOLD", 15),bg="green",fg="white")
-    status.place(x=570,y=360)
+    status.place(x=breadth-796,y=height-408)
 
     return player_purse,current_bet
 
@@ -325,7 +328,7 @@ def call(player_purse, current_bet):                    #if a player wamts to ca
     status1=player_names[i]+" has called                                       "
     status=Label(text=status1)    
     status.config(font=("Courier BOLD", 15),bg="green",fg="white")
-    status.place(x=570,y=360)
+    status.place(x=breadth-796,y=height-408)
 
     purse[i]-=max(r)-r[i]
     round_pool+=max(r)-r[i]
@@ -334,7 +337,7 @@ def call(player_purse, current_bet):                    #if a player wamts to ca
     if cc==(len(player_names)-len(player_who_have_folded)-1):
         cc=0
         check_button=Button(text="Check",command=call_check,padx=20,pady=10,bg="#006600",fg="white")
-        check_button.place(x=1000,y=600)
+        check_button.place(x=breadth-366,y=height-168)
         check_button.config(font=("Courier BOLD", 12))
         round_number()
     player_change()
@@ -346,7 +349,7 @@ def check():                                            #if a player wants to ch
     status1=player_names[i]+" has checked                                   "
     status=Label(text=status1)    
     status.config(font=("Courier BOLD", 15),bg="green",fg="white")
-    status.place(x=570,y=360)
+    status.place(x=breadth-796,y=height-408)
 
     chc+=1
     b=0
@@ -354,7 +357,7 @@ def check():                                            #if a player wants to ch
     if chc==(len(player_names)-len(player_who_have_folded)):
         chc=0
         check_button=Button(text="Check",command=call_check,padx=20,pady=10,bg="#006600",fg="white")
-        check_button.place(x=1000,y=600)
+        check_button.place(x=breadth-366,y=height-168)
         check_button.config(font=("Courier BOLD", 12))
         round_number()
     player_change()
@@ -366,7 +369,7 @@ def fold():                                             #if a player wants to fo
     status1=player_names[i]+" has folded                                     "
     status=Label(text=status1)    
     status.config(font=("Courier BOLD", 15),bg="green",fg="white")
-    status.place(x=570,y=360)
+    status.place(x=breadth-796,y=height-408)
 
     player_who_have_folded.append(player_names[i])
     if(len(player_who_have_folded)-len(player_names)==-1):
@@ -379,13 +382,13 @@ def fold():                                             #if a player wants to fo
     if chc==(len(player_names)-len(player_who_have_folded)):
         chc=0
         check_button=Button(text="Check",command=call_check,padx=20,pady=10,bg="#006600",fg="white")
-        check_button.place(x=1000,y=600)
+        check_button.place(x=breadth-366,y=height-168)
         check_button.config(font=("Courier BOLD", 12))
         round_number()
     if cc==(len(player_names)-len(player_who_have_folded)-1):
         cc=0
         check_button=Button(text="Check",command=call_check,padx=20,pady=10,bg="#006600",fg="white")
-        check_button.place(x=1000,y=600)
+        check_button.place(x=breadth-366,y=height-168)
         check_button.config(font=("Courier BOLD", 12))
         round_number()
     player_change()
@@ -402,10 +405,10 @@ def call_bet(bet_amount=0):
     if(bet_amount==0):
         slider=Scale(from_=current_bet, to=purse[i], resolution=1000,orient=VERTICAL,length=150,tickinterval=1000,command=show)
         slider.config(bg="#006600",fg="white",font=("Courier BOLD", 12))
-        slider.place(x=1200,y=500)
+        slider.place(x=breadth-166,y=height-268)
 
         submit=Button(text="Place",command=lambda: submitbet(t,bet_amount),padx=20,pady=10,bg="#006600",fg="white")
-        submit.place(x=1350,y=500)
+        submit.place(x=breadth-116,y=height-318)
     else:
         purse[i],current_bet=bet(purse[i],current_bet,bet_amount,i,dollar)
         player_change()
@@ -451,8 +454,8 @@ check_button.config(font=("Courier BOLD", 12))
 fold_button.config(font=("Courier BOLD", 12))
 call_button.config(font=("Courier BOLD", 12))
 
-bet_button.place(x=1100,y=600)
-check_button.place(x=1000,y=600)
-fold_button.place(x=1000,y=550)
+bet_button.place(x=breadth-266,y=height-168)
+check_button.place(x=breadth-366,y=height-168)
+fold_button.place(x=breadth-366,y=height-218)
 
 mainloop()
