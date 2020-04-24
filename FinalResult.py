@@ -38,6 +38,7 @@ def solve2(hand1,hand2):
             return 2
     return 0
 
+#to check rank of cards 
 def xyz(cardlist,rank):
     hand1=cardlist[0:5]
     hand2=cardlist[5:11]
