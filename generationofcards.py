@@ -1,4 +1,7 @@
 import random
+
+#generating a deck of 52 cards
+
 def card_deck(List,List1,List2,List3,List4,deck):                                                           
     for j in range(0,13):
         if j<8:
@@ -28,6 +31,9 @@ def card_deck(List,List1,List2,List3,List4,deck):
     return deck,deck1
 
 card_deck([],[],[],[],[],[])
+
+#randomly distributing cards among the players
+
 def player_hand(deck,List6,n,player_names):
     for p in range(1,n+1):
         l=random.choice(deck)
@@ -43,6 +49,8 @@ def player_hand(deck,List6,n,player_names):
 
     return deck,List6
 
+#reveal the flop
+
 def round1_reveal(deck,table):
     y=random.choice(deck)
     deck.remove(y)
@@ -55,12 +63,16 @@ def round1_reveal(deck,table):
     table.append(z)
     return deck,table
 
+#reveal the turn
+
 def round2_reveal(deck,table):
     w= random.choice(deck)
     deck.remove(w)
     table.append(w)
     return deck,table
- 
+
+#reveal the river
+
 def round3_reveal(deck,table):
     v= random.choice(deck)
     deck.remove(v)
