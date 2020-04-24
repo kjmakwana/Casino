@@ -5,6 +5,8 @@ from itertools import combinations
 import bpoker as bp
 import math
 
+
+#checks the strength of the cards with the bot before the flop is revealed and accordingly makes a move
 def pre_flop(bcards,current_bet):
     values=[i[0:2] for i in bcards]
     values=list(map(int,values))
@@ -15,7 +17,8 @@ def pre_flop(bcards,current_bet):
         return (6-abs(values[0]-values[1]))*current_bet
     else:
         return 1000
-         
+
+#checks the strength of the cards and whether there is a chance of winning before the turn is revealed and accordingly makes a move         
 def pre_turn(bcards,dealer,List5):
     betamount=0
     outspt=[0,0,0,0,0,0,0,0,0,0]
@@ -58,7 +61,7 @@ def pre_turn(bcards,dealer,List5):
         betamount=betamount+round(outspt[i]*(1.2**(10-i)))
     return betamount
 
-
+#checks the strength of the cards and whether there is a chance of winning before the river is revealed and accordingly makes a move
 def pre_river(bcards,dealer,List5):
     betamount=0
     outspr=[0,0,0,0,0,0,0,0,0,0] 
@@ -101,6 +104,7 @@ def pre_river(bcards,dealer,List5):
 
     return betamount
 
+#checks the strength of the cards and whether there is a chance of winning after the river is revealed and accordingly makes a move
 def post_river(bcards,dealer,List5):
     avcf=bcards+dealer
     betamount=(9-b.find_rank(avcf,0))*random.randint(5,8)*1000
