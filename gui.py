@@ -1,6 +1,9 @@
 from tkinter import *
 from PIL import ImageTk,Image
 import random
+
+#Generating card images using tkinter
+#find the string "E:\Poker\PNG" and replace all with the destination of the folder PNG on your machine
     
 def my_func2C(x1,y1):
     global my_img2
@@ -320,6 +323,9 @@ def xyz(x1,y1):
     my_label53=Label(image=my_img53)   
     my_label53.place(x=x1,y=y1)
 
+
+#putting all the functions in a list
+
 List7=[]
 
 List7.append(my_func2C)
@@ -378,7 +384,7 @@ List7.append(my_func12D)
 List7.append(my_func13D)
 List7.append(my_func14D)
 
-
+#showing player cards
 
 def player_reveal(List6,deck1,x1,y1):
     x1=600
@@ -390,6 +396,8 @@ def player_reveal(List6,deck1,x1,y1):
                 x1=x1+50
     return x1,y1
 
+#showing flop cards selected randomly in the file generationofcards.py
+
 def flop_reveal(table,deck1,x1,y1):
     x1=525
     y1=200
@@ -400,6 +408,7 @@ def flop_reveal(table,deck1,x1,y1):
                 x1=x1+60
     return x1,y1
 
+#showing turn cards selected randomly in the file generationofcards.py
 
 def turn_reveal(table,deck1,x1,y1):
     x1=525+180
@@ -410,6 +419,7 @@ def turn_reveal(table,deck1,x1,y1):
             x1=x1+60
     return x1,y1
 
+#showing river cards selected randomly in the file generationofcards.py
 
 def river_reveal(table,deck1,x1,y1):
     x1=525+240
@@ -419,6 +429,8 @@ def river_reveal(table,deck1,x1,y1):
             List7[i1](x1,y1)
             x1=x1+60
     return x1,y1
+
+#reset the pictures 
 
 def reset(x1,y1,n,rno):
     x1=525
@@ -441,7 +453,7 @@ def reset(x1,y1,n,rno):
     rn.config(font=("Courier BOLD", 15))
     rn.place(x=620,y=120)
         
-
+#showing result
         
 def finaldisplay(x1,y1,List6,n,deck1,player_names):
     print(List6)
