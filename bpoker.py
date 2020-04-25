@@ -175,7 +175,7 @@ def round_number():                                                 #to keep che
                 print(purse[fplayer])
             else:
                 print("The pot is split in between ",end="")
-                
+                winnerw=""
                 split=set(split)
                 for s in split:
                     print(player_names[s],end="  ")

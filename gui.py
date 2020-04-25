@@ -3,325 +3,331 @@ from PIL import ImageTk,Image
 import random
 
 #Generating card images using tkinter
-#find the string "E:\Poker\PNG" and replace all with the destination of the folder PNG on your machine
+#find the string "E:\Poker\PNG2" and replace all with the destination of the folder PNG on your machine
     
 def my_func2C(x1,y1):
     global my_img2
-    my_img2=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\2C.jpg"))
+    my_img2=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\2C.jpg"))
     my_label2=Label(image=my_img2)   
     my_label2.place(x=x1,y=y1)
 
 def my_func3C(x1,y1):
     global my_img3
-    my_img3=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\3C.jpg"))
+    my_img3=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\3C.jpg"))
     my_label3=Label(image=my_img3)   
     my_label3.place(x=x1,y=y1)
 
 def my_func4C(x1,y1):
     global my_img4
-    my_img4=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\4C.jpg"))
+    my_img4=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\4C.jpg"))
     my_label4=Label(image=my_img4)   
     my_label4.place(x=x1,y=y1)
 
 def my_func5C(x1,y1):
     global my_img5
-    my_img5=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\5C.jpg"))
+    my_img5=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\5C.jpg"))
     my_label5=Label(image=my_img5)   
     my_label5.place(x=x1,y=y1)
 
 def my_func6C(x1,y1):
     global my_img6
-    my_img6=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\6C.jpg"))
+    my_img6=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\6C.jpg"))
     my_label6=Label(image=my_img6)   
     my_label6.place(x=x1,y=y1)
 
 def my_func7C(x1,y1):
     global my_img7
-    my_img7=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\7C.jpg"))
+    my_img7=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\7C.jpg"))
     my_label7=Label(image=my_img7)   
     my_label7.place(x=x1,y=y1)
 
 def my_func8C(x1,y1):
     global my_img8
-    my_img8=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\8C.jpg"))
+    my_img8=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\8C.jpg"))
     my_label8=Label(image=my_img8)   
     my_label8.place(x=x1,y=y1)
 
 def my_func9C(x1,y1):
     global my_img9
-    my_img9=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\9C.jpg"))
+    my_img9=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\9C.jpg"))
     my_label9=Label(image=my_img9)   
     my_label9.place(x=x1,y=y1)
 
 def my_func10C(x1,y1):
     global my_img10
-    my_img10=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\10C.jpg"))
+    my_img10=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\10C.jpg"))
     my_label10=Label(image=my_img10)   
     my_label10.place(x=x1,y=y1)
 
 def my_func11C(x1,y1):
     global my_img11
-    my_img11=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\JC.jpg"))
+    my_img11=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\JC.jpg"))
     my_label11=Label(image=my_img11)   
     my_label11.place(x=x1,y=y1)
 
 def my_func12C(x1,y1):
     global my_img12
-    my_img12=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\QC.jpg"))
+    my_img12=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\QC.jpg"))
     my_label12=Label(image=my_img12)   
     my_label12.place(x=x1,y=y1)
 
 def my_func13C(x1,y1):
     global my_img13
-    my_img13=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\KC.jpg"))
+    my_img13=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\KC.jpg"))
     my_label13=Label(image=my_img13)   
     my_label13.place(x=x1,y=y1)
 
 def my_func14C(x1,y1):
     global my_img14
-    my_img14=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\AC.jpg"))
+    my_img14=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\AC.jpg"))
     my_label14=Label(image=my_img14)   
     my_label14.place(x=x1,y=y1)
 
 def my_func2S(x1,y1):
     global my_img15
-    my_img15=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\2S.jpg"))
+    my_img15=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\2S.jpg"))
     my_label15=Label(image=my_img15)   
     my_label15.place(x=x1,y=y1)
 
 def my_func3S(x1,y1):
     global my_img161
-    my_img161=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\3S.jpg"))
+    my_img161=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\3S.jpg"))
     my_label161=Label(image=my_img161)   
     my_label161.place(x=x1,y=y1)
 
 def my_func4S(x1,y1):
     global my_img162
-    my_img162=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\4S.jpg"))
+    my_img162=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\4S.jpg"))
     my_label162=Label(image=my_img162)   
     my_label162.place(x=x1,y=y1)
 
 def my_func5S(x1,y1):
     global my_img17
-    my_img17=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\5S.jpg"))
+    my_img17=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\5S.jpg"))
     my_label17=Label(image=my_img17)   
     my_label17.place(x=x1,y=y1)
 
 def my_func6S(x1,y1):
     global my_img18
-    my_img18=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\6S.jpg"))
+    my_img18=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\6S.jpg"))
     my_label18=Label(image=my_img18)   
     my_label18.place(x=x1,y=y1)
 
 def my_func7S(x1,y1):
     global my_img19
-    my_img19=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\7S.jpg"))
+    my_img19=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\7S.jpg"))
     my_label19=Label(image=my_img19)   
     my_label19.place(x=x1,y=y1)
 
 def my_func8S(x1,y1):
     global my_img20
-    my_img20=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\8S.jpg"))
+    my_img20=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\8S.jpg"))
     my_label20=Label(image=my_img20)   
     my_label20.place(x=x1,y=y1)
 
 def my_func9S(x1,y1):
     global my_img21
-    my_img21=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\9S.jpg"))
+    my_img21=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\9S.jpg"))
     my_label21=Label(image=my_img21)   
     my_label21.place(x=x1,y=y1)
 
 def my_func10S(x1,y1):
     global my_img22
-    my_img22=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\10S.jpg"))
+    my_img22=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\10S.jpg"))
     my_label22=Label(image=my_img22)   
     my_label22.place(x=x1,y=y1)
 
 def my_func11S(x1,y1):
     global my_img23
-    my_img23=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\JS.jpg"))
+    my_img23=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\JS.jpg"))
     my_label23=Label(image=my_img23)   
     my_label23.place(x=x1,y=y1)
 
 def my_func12S(x1,y1):
     global my_img24
-    my_img24=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\QS.jpg"))
+    my_img24=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\QS.jpg"))
     my_label24=Label(image=my_img24)   
     my_label24.place(x=x1,y=y1)
 
 def my_func13S(x1,y1):
     global my_img25
-    my_img25=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\KS.jpg"))
+    my_img25=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\KS.jpg"))
     my_label25=Label(image=my_img25)   
     my_label25.place(x=x1,y=y1)
 
 def my_func14S(x1,y1):
     global my_img26
-    my_img26=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\AS.jpg"))
+    my_img26=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\AS.jpg"))
     my_label26=Label(image=my_img26)   
     my_label26.place(x=x1,y=y1)
 
 def my_func2H(x1,y1):
     global my_img27
-    my_img27=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\2H.jpg"))
+    my_img27=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\2H.jpg"))
     my_label27=Label(image=my_img27)   
     my_label27.place(x=x1,y=y1)
 
 def my_func3H(x1,y1):
     global my_img28
-    my_img28=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\3H.jpg"))
+    my_img28=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\3H.jpg"))
     my_label28=Label(image=my_img28)   
     my_label28.place(x=x1,y=y1)
 
 def my_func4H(x1,y1):
     global my_img29
-    my_img29=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\4H.jpg"))
+    my_img29=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\4H.jpg"))
     my_label29=Label(image=my_img29)   
     my_label29.place(x=x1,y=y1)
 
 def my_func5H(x1,y1):
     global my_img30
-    my_img30=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\5H.jpg"))
+    my_img30=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\5H.jpg"))
     my_label30=Label(image=my_img30)   
     my_label30.place(x=x1,y=y1)
 
 def my_func6H(x1,y1):
     global my_img31
-    my_img31=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\6H.jpg"))
+    my_img31=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\6H.jpg"))
     my_label31=Label(image=my_img31)   
     my_label31.place(x=x1,y=y1)
 
 def my_func7H(x1,y1):
     global my_img32
-    my_img32=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\7H.jpg"))
+    my_img32=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\7H.jpg"))
     my_label32=Label(image=my_img32)   
     my_label32.place(x=x1,y=y1)
 
 def my_func8H(x1,y1):
     global my_img33
-    my_img33=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\8H.jpg"))
+    my_img33=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\8H.jpg"))
     my_label33=Label(image=my_img33)   
     my_label33.place(x=x1,y=y1)
 
 def my_func9H(x1,y1):
     global my_img34
-    my_img34=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\9H.jpg"))
+    my_img34=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\9H.jpg"))
     my_label34=Label(image=my_img34)   
     my_label34.place(x=x1,y=y1)
 
 def my_func10H(x1,y1):
     global my_img35
-    my_img35=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\10H.jpg"))
+    my_img35=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\10H.jpg"))
     my_label35=Label(image=my_img35)   
     my_label35.place(x=x1,y=y1)
 
 def my_func11H(x1,y1):
     global my_img36
-    my_img36=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\JH.jpg"))
+    my_img36=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\JH.jpg"))
     my_label36=Label(image=my_img36)   
     my_label36.place(x=x1,y=y1)
 
 def my_func12H(x1,y1):
     global my_img37
-    my_img37=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\QH.jpg"))
+    my_img37=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\QH.jpg"))
     my_label37=Label(image=my_img37)   
     my_label37.place(x=x1,y=y1)
 
 def my_func13H(x1,y1):
     global my_img38
-    my_img38=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\KH.jpg"))
+    my_img38=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\KH.jpg"))
     my_label38=Label(image=my_img38)   
     my_label38.place(x=x1,y=y1)
 
 def my_func14H(x1,y1):
     global my_img39
-    my_img39=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\AH.jpg"))
+    my_img39=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\AH.jpg"))
     my_label39=Label(image=my_img39)   
     my_label39.place(x=x1,y=y1)
 
 def my_func2D(x1,y1):
     global my_img40
-    my_img40=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\2D.jpg"))
+    my_img40=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\2D.jpg"))
     my_label40=Label(image=my_img40)   
     my_label40.place(x=x1,y=y1)
 
 def my_func3D(x1,y1):
     global my_img41
-    my_img41=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\3D.jpg"))
+    my_img41=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\3D.jpg"))
     my_label41=Label(image=my_img41)   
     my_label41.place(x=x1,y=y1)
 
 def my_func4D(x1,y1):
     global my_img42
-    my_img42=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\4D.jpg"))
+    my_img42=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\4D.jpg"))
     my_label42=Label(image=my_img42)   
     my_label42.place(x=x1,y=y1)
 
 def my_func5D(x1,y1):
     global my_img43
-    my_img43=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\5D.jpg"))
+    my_img43=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\5D.jpg"))
     my_label43=Label(image=my_img43)   
     my_label43.place(x=x1,y=y1)
 
 def my_func6D(x1,y1):
     global my_img44
-    my_img44=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\6D.jpg"))
+    my_img44=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\6D.jpg"))
     my_label44=Label(image=my_img44)   
     my_label44.place(x=x1,y=y1)
 
 def my_func7D(x1,y1):
     global my_img45
-    my_img45=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\7D.jpg"))
+    my_img45=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\7D.jpg"))
     my_label45=Label(image=my_img45)   
     my_label45.place(x=x1,y=y1)
 
 def my_func8D(x1,y1):
     global my_img46
-    my_img46=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\8D.jpg"))
+    my_img46=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\8D.jpg"))
     my_label46=Label(image=my_img46)   
     my_label46.place(x=x1,y=y1)
 
 def my_func9D(x1,y1):
     global my_img47
-    my_img47=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\9D.jpg"))
+    my_img47=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\9D.jpg"))
     my_label47=Label(image=my_img47)   
     my_label47.place(x=x1,y=y1)
 
 def my_func10D(x1,y1):
     global my_img48
-    my_img48=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\10D.jpg"))
+    my_img48=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\10D.jpg"))
     my_label48=Label(image=my_img48)   
     my_label48.place(x=x1,y=y1)
 
 def my_func11D(x1,y1):
     global my_img49
-    my_img49=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\JD.jpg"))
+    my_img49=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\JD.jpg"))
     my_label49=Label(image=my_img49)   
     my_label49.place(x=x1,y=y1)
 
 def my_func12D(x1,y1):
     global my_img50
-    my_img50=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\QD.jpg"))
+    my_img50=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\QD.jpg"))
     my_label50=Label(image=my_img50)   
     my_label50.place(x=x1,y=y1)
 
 def my_func13D(x1,y1):
     global my_img51
-    my_img51=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\KD.jpg"))
+    my_img51=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\KD.jpg"))
     my_label51=Label(image=my_img51)   
     my_label51.place(x=x1,y=y1)
 
 def my_func14D(x1,y1):
     global my_img52
-    my_img52=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\AD.jpg"))
+    my_img52=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\AD.jpg"))
     my_label52=Label(image=my_img52)   
     my_label52.place(x=x1,y=y1)
 
+card_index=0
+my_label53=[]
+
 def xyz(x1,y1):
-    global my_img53
-    my_img53=ImageTk.PhotoImage(Image.open(r"E:\Poker\PNG\red_back.jpg"))
-    my_label53=Label(image=my_img53)   
-    my_label53.place(x=x1,y=y1)
+    global my_img53,card_index
+    my_img53=ImageTk.PhotoImage(Image.open(r"C:\Users\sgmakwana\Documents\GitHub\Casino\PNG\red_back"+str(card_index+1)+".jpg"))
+    my_label53.append(Label(image=my_img53))   
+    my_label53[card_index].place(x=x1,y=y1)
+    #print(card_index)
+    card_index+=1
+
 
 
 #putting all the functions in a list
